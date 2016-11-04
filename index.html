@@ -1,9 +1,25 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Hi</title>
-	</head>
-	<body>
-		<h1>This is my page!</h1>
-	</body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Coditor</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+    <div id="myWrapper">
+        <h1>ALways do<br /> <span id="changeable">Whatever you code</span></h1>
+    </div>
+    <div class="editor">
+        <textarea class="code html" placeholder="HTML"></textarea>
+        <textarea class="code css" placeholder="CSS"></textarea>
+        <textarea class="code js" placeholder="Javascript"></textarea>
+    </div>
+
+    <div class="viewer">
+        <pre class="code"></pre>
+    </div>
+
+    <script src="main.js"></script>
+</body>
 </html>

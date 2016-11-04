@@ -1,0 +1,89 @@
+$background-color: #eee;
+$editor-background-color: #ddddd0;
+
+$lovely-blue: #00cdcd;
+$main-font-color: #000;
+$textarea-color: #555;
+$code-color: #3e2b26;
+
+$main-font-family: "Lucida Console", monospace,Helvetica, sans-serif;
+$code-font-family: Courier, "Lucida Console", monospace;
+
+$textarea-border: 2px solid #eee;
+$textarea-border-transition: border 0.8s;
+$textarea-border-focus: 2px solid #bbb;
+
+$textarea-box-shadow: 0 0 2px #aaa;
+
+@mixin change-tab-size($size) {
+  -moz-tab-size: $size;
+  -o-tab-size: $size;
+  tab-size: $size;
+}
+
+body {
+  background-color: $background-color;
+  margin: 0;
+}
+
+body * {
+  font-family: $main-font-family;
+  color: $main-font-color;
+  margin: 0;
+  padding: 0;
+}
+#myWrapper h1 {
+  text-transform: uppercase;
+  line-height: 2em;
+  text-align: center;
+}
+div.editor {
+  background-color: $editor-background-color;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 4em;
+  textarea {
+    display: block;
+    flex: 1;
+    height: 20em;
+    padding: 1.5em 1em;
+    font-size: 1.1em;
+    text-indent: each-line;
+    outline: none;
+    border: $textarea-border;
+    transition: $textarea-border-transition;
+    resize: none;
+    overflow: auto;
+    margin: 1em;
+
+    &:focus {
+      box-shadow: $textarea-box-shadow;
+      border: $textarea-border-focus;
+    }
+
+    &.code {
+      @include change-tab-size(4);
+      white-space: pre-wrap;
+    }
+    &:nth-child(1):after {
+      content: "HTML";
+    }
+  }
+}
+div.viewer {
+  height: 20em;
+  padding: 1em 1em;
+  background-color: white;
+  font-size: 1.1em;
+  display: flex;
+  pre {
+    display: block;
+    white-space: normal;
+    word-break: break-all;
+  }
+  overflow: auto;
+}
+.code {
+  font-family: $code-font-family;
+  color: $code-color;
+}
