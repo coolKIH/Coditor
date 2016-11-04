@@ -4,14 +4,14 @@ $editor-background-color: #ddddd0;
 $lovely-blue: #00cdcd;
 $main-font-color: #000;
 $textarea-color: #555;
-$code-color: #3e2b26;
+$code-color: #b82601;
 
 $main-font-family: "Lucida Console", monospace,Helvetica, sans-serif;
 $code-font-family: Courier, "Lucida Console", monospace;
 
-$textarea-border: 2px solid #eee;
+$textarea-border: 10px solid #eee;
 $textarea-border-transition: border 0.8s;
-$textarea-border-focus: 2px solid #bbb;
+$textarea-border-focus: 10px solid #bbb;
 
 $textarea-box-shadow: 0 0 2px #aaa;
 
@@ -43,8 +43,9 @@ div.editor {
   flex-wrap: wrap;
   margin-bottom: 4em;
   textarea {
-    display: block;
     flex: 1;
+    display: block;
+    min-width:15em;
     height: 20em;
     padding: 1.5em 1em;
     font-size: 1.1em;
@@ -53,8 +54,8 @@ div.editor {
     border: $textarea-border;
     transition: $textarea-border-transition;
     resize: none;
-    overflow: auto;
-    margin: 1em;
+    overflow-x: auto;
+    overflow-y: auto;
 
     &:focus {
       box-shadow: $textarea-box-shadow;
@@ -64,6 +65,8 @@ div.editor {
     &.code {
       @include change-tab-size(4);
       white-space: pre-wrap;
+      font-family: $code-font-family;
+      color: $code-color;
     }
     &:nth-child(1):after {
       content: "HTML";
@@ -76,6 +79,7 @@ div.viewer {
   background-color: white;
   font-size: 1.1em;
   display: flex;
+  border: $textarea-border-focus;
   pre {
     display: block;
     white-space: normal;
@@ -83,7 +87,4 @@ div.viewer {
   }
   overflow: auto;
 }
-.code {
-  font-family: $code-font-family;
-  color: $code-color;
-}
+

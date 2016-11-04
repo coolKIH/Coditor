@@ -19,26 +19,29 @@ div.editor {
   flex-wrap: wrap;
   margin-bottom: 4em; }
   div.editor textarea {
-    display: block;
     flex: 1;
+    display: block;
+    min-width: 15em;
     height: 20em;
     padding: 1.5em 1em;
     font-size: 1.1em;
     text-indent: each-line;
     outline: none;
-    border: 2px solid #eee;
+    border: 10px solid #eee;
     transition: border 0.8s;
     resize: none;
-    overflow: auto;
-    margin: 1em; }
+    overflow-x: auto;
+    overflow-y: auto; }
     div.editor textarea:focus {
       box-shadow: 0 0 2px #aaa;
-      border: 2px solid #bbb; }
+      border: 10px solid #bbb; }
     div.editor textarea.code {
       -moz-tab-size: 4;
       -o-tab-size: 4;
       tab-size: 4;
-      white-space: pre-wrap; }
+      white-space: pre-wrap;
+      font-family: Courier, "Lucida Console", monospace;
+      color: #b82601; }
     div.editor textarea:nth-child(1):after {
       content: "HTML"; }
 
@@ -48,14 +51,11 @@ div.viewer {
   background-color: white;
   font-size: 1.1em;
   display: flex;
+  border: 10px solid #bbb;
   overflow: auto; }
   div.viewer pre {
     display: block;
     white-space: normal;
     word-break: break-all; }
-
-.code {
-  font-family: Courier, "Lucida Console", monospace;
-  color: #3e2b26; }
 
 /*# sourceMappingURL=styles.css.map */
