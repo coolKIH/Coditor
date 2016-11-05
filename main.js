@@ -69,19 +69,11 @@ window.onload = (function(){
     }
     setAttributes.call(textarea,attrsObj);
     if(textarea.addEventListener) {
-        textarea.addEventListener('input',function (e) {
-            inputToOutputEventListener.call(this,e);
-        });
-        textarea.addEventListener('keydown',function(e){
-            keydownEventListener.call(this,e);
-        });
+        textarea.addEventListener('input',inputToOutputEventListener);
+        textarea.addEventListener('keydown',keydownEventListener);
     } else if(textarea.attachEvent) {
-        textarea.attachEvent('input', function (e) {
-            inputToOutputEventListener.call(this,e);
-        });
-        textarea.attachEvent('keydown',function (e) {
-            keydownEventListener.call(this,e);
-        })
+        textarea.attachEvent('input', inputToOutputEventListener);
+        textarea.attachEvent('keydown',keydownEventListener)
     }
 
 })();
