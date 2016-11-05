@@ -3,8 +3,9 @@ $editor-background-color: #ddddd0;
 
 $lovely-blue: #00cdcd;
 $main-font-color: #000;
+$title-font-color: #555555;
 $textarea-color: #555;
-$code-color: #b82601;
+$code-color: #062f4f;
 
 $main-font-family: "Lucida Console", monospace,Helvetica, sans-serif;
 $code-font-family: Courier, "Lucida Console", monospace;
@@ -32,11 +33,29 @@ body * {
   margin: 0;
   padding: 0;
 }
-#myWrapper h1 {
-  text-transform: uppercase;
-  line-height: 2em;
-  text-align: center;
+
+div#headerWrapper {
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: column;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  img {
+    text-align: center;
+    height: 2em;
+    padding: 2em 0 0 0;
+  }
+  h1 {
+    color: $title-font-color;
+    text-transform: uppercase;
+    line-height: 1.2em;
+    text-align: center;
+  }
 }
+
+
 div.editor {
   background-color: $editor-background-color;
   display: flex;

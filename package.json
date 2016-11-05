@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "local-server":"lite-server"
+    "start":"\"lite-server\""
   },
   "author": "Hao Huang",
   "license": "ISC",

@@ -33,13 +33,11 @@ window.onload = (function(){
         spellcheck: "false",
         autofocus: "autofocus"
     };
-    setAttributes.call(textarea,attrsObj);
-    textarea.addEventListener('input',function(e){
+    function inputToOutputEventListener(e) {
         resultContainer.innerHTML = this.value;
         console.log(this.value);
-    });
-
-    textarea.addEventListener('keydown',function(e){
+    }
+    function keydownEventListener(e) {
         var key = e.key;
         var start = this.selectionStart;
         if(key === 'Tab'){
@@ -60,7 +58,7 @@ window.onload = (function(){
         }else if(key === ')' || key === '}') {
             var leftPair = pairCharData[key];
             if(this.lastKey === leftPair) {
-            this.selectionStart = this.selectionEnd = start +1;
+                this.selectionStart = this.selectionEnd = start +1;
                 e.preventDefault();
             }
 
@@ -68,6 +66,22 @@ window.onload = (function(){
         if(key != 'Shift') {
             this.lastKey = key;
         }
-    });
+    }
+    setAttributes.call(textarea,attrsObj);
+    if(textarea.addEventListener) {
+        textarea.addEventListener('input',function (e) {
+            inputToOutputEventListener.call(this,e);
+        });
+        textarea.addEventListener('keydown',function(e){
+            keydownEventListener.call(this,e);
+        });
+    } else if(textarea.attachEvent) {
+        textarea.attachEvent('input', function (e) {
+            inputToOutputEventListener.call(this,e);
+        });
+        textarea.attachEvent('keydown',function (e) {
+            keydownEventListener.call(this,e);
+        })
+    }
 
 })();

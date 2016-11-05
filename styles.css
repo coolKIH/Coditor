@@ -8,10 +8,23 @@ body * {
   margin: 0;
   padding: 0; }
 
-#myWrapper h1 {
-  text-transform: uppercase;
-  line-height: 2em;
-  text-align: center; }
+div#headerWrapper {
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: column;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center; }
+  div#headerWrapper img {
+    text-align: center;
+    height: 2em;
+    padding: 2em 0 0 0; }
+  div#headerWrapper h1 {
+    color: #555555;
+    text-transform: uppercase;
+    line-height: 1.2em;
+    text-align: center; }
 
 div.editor {
   background-color: #ddddd0;
@@ -41,7 +54,7 @@ div.editor {
       tab-size: 4;
       white-space: pre-wrap;
       font-family: Courier, "Lucida Console", monospace;
-      color: #b82601; }
+      color: #062f4f; }
     div.editor textarea:nth-child(1):after {
       content: "HTML"; }
 
