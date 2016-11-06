@@ -64,8 +64,11 @@ div.viewer {
   background-color: white;
   font-size: 1.1em;
   display: flex;
-  border: 10px solid #bbb;
+  border: 10px solid #eee;
+  overflow: auto;
   overflow: auto; }
+  div.viewer.green {
+    border: 10px solid #63e072; }
   div.viewer pre {
     display: block;
     white-space: normal;

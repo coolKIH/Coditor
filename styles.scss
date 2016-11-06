@@ -12,6 +12,9 @@ $code-font-family: Courier, "Lucida Console", monospace;
 
 $textarea-border: 10px solid #eee;
 $textarea-border-transition: border 0.8s;
+@mixin set-border-($weight,$shape,$color) {
+  border: $weight $shape $color;
+}
 $textarea-border-focus: 10px solid #bbb;
 
 $textarea-box-shadow: 0 0 2px #aaa;
@@ -98,7 +101,13 @@ div.viewer {
   background-color: white;
   font-size: 1.1em;
   display: flex;
-  border: $textarea-border-focus;
+  border: $textarea-border;
+  overflow: auto;
+
+    &.green {
+        @include set-border-(10px,solid,#63e072)
+    }
+
   pre {
     display: block;
     white-space: normal;
