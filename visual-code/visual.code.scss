@@ -1,18 +1,14 @@
-$background-color: #eee;
 $editor-background-color: #ddddd0;
 
 $lovely-blue: #00cdcd;
-$main-font-color: #000;
-$title-font-color: #555555;
 $textarea-color: #555;
 $code-color: #062f4f;
 
-$main-font-family: "Lucida Console", monospace,Helvetica, sans-serif;
 $code-font-family: Courier, "Lucida Console", monospace;
 
 $textarea-border: 10px solid #eee;
 $textarea-border-transition: border 0.8s;
-@mixin set-border-($weight,$shape,$color) {
+@mixin set-border($weight,$shape,$color) {
   border: $weight $shape $color;
 }
 $textarea-border-focus: 10px solid #bbb;
@@ -23,39 +19,6 @@ $textarea-box-shadow: 0 0 2px #aaa;
   -moz-tab-size: $size;
   -o-tab-size: $size;
   tab-size: $size;
-}
-
-body {
-  background-color: $background-color;
-  margin: 0;
-}
-
-body * {
-  font-family: $main-font-family;
-  color: $main-font-color;
-  margin: 0;
-  padding: 0;
-}
-
-div#headerWrapper {
-  display: -webkit-flex;
-  display: flex;
-  -ms-flex-direction: column;
-  -webkit-flex-direction: column;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-  img {
-    text-align: center;
-    height: 2em;
-    padding: 2em 0 0 0;
-  }
-  h1 {
-    color: $title-font-color;
-    text-transform: uppercase;
-    line-height: 1.2em;
-    text-align: center;
-  }
 }
 
 
@@ -100,12 +63,10 @@ div.viewer {
   padding: 1em 1em;
   background-color: white;
   font-size: 1.1em;
-  display: flex;
   border: $textarea-border;
-  overflow: auto;
 
     &.green {
-        @include set-border-(10px,solid,#63e072)
+        @include set-border(10px,solid,#63e072)
     }
 
   pre {
@@ -113,6 +74,9 @@ div.viewer {
     white-space: normal;
     word-break: break-all;
   }
-  overflow: auto;
+  iframe {
+    width: 100%;
+    border: 0;
+  }
 }
 

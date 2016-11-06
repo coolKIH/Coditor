@@ -1,29 +1,10 @@
-window.onload = function(){
-
-    var textareas = document.body.querySelectorAll('textarea');
-    var resultarea = document.body.querySelector('div.viewer');
-    var resultContainer = resultarea.querySelector('pre');
-
-    var textarea;
-    textareas.forEach(function(ta){
-        editorFuncs.setAttributes.call(ta,editorValues.textAreaAttrs);
-        if(ta.className.indexOf("html")>-1) {
-            textarea = ta;
-        }
+(function() {
+    function supportsImports() {
+        return 'import' in document.createElement('link');
+    }
+    var content = document.querySelector('link[rel="import"]').import;
+    var divs = content.querySelectorAll("div");
+    divs.forEach(function(div){
+        document.body.appendChild(div.cloneNode(true));
     })
-    resultarea.className += " green";
-
-    textarea.lastKey = '';
-
-    function inputToOutputEventListener(e) {
-        editorFuncs.writeHTML(resultContainer,this.value);
-    }
-    editorFuncs.setAttributes.call(textarea,editorValues.textAreaAttrs);
-    if(textarea.addEventListener) {
-        textarea.addEventListener('input',inputToOutputEventListener);
-        textarea.addEventListener('keydown',editorFuncs.keydownEventListener);
-    } else if(textarea.attachEvent) {
-        textarea.attachEvent('input', inputToOutputEventListener);
-        textarea.attachEvent('keydown',editorFuncs.keydownEventListener)
-    }
-};
+})();

@@ -1,0 +1,42 @@
+$background-color: #eee;
+
+$lovely-blue: #00cdcd;
+$main-font-color: #000;
+$title-font-color: #555555;
+
+$main-font-family: "Lucida Console", monospace,Helvetica, sans-serif;
+
+html,body {
+  margin: 0 auto;
+  padding: 0 0;
+}
+body {
+  background: $background-color;
+}
+
+body * {
+  margin: 0 auto;
+  padding:0 0;
+  border: 0;
+}
+
+div#headerWrapper {
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: column;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  img {
+    text-align: center;
+    height: 2em;
+    padding: 2em 0 0 0;
+  }
+  h1 {
+    color: $title-font-color;
+    text-transform: uppercase;
+    line-height: 1.5em;
+    text-align: center;
+  }
+}
