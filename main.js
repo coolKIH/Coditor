@@ -9,7 +9,7 @@
         })
     } else {
         console.log("link import not supported");
-        HttpRequestForTemplate(visualCodeWrapper,"visual-code/visual.code.html");
+        controlFuncs.HttpRequestForTemplate(visualCodeWrapper,"visual-code/visual.code.html");
     }
 
 })();
