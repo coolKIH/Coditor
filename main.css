@@ -28,4 +28,21 @@ div#headerWrapper {
     line-height: 1.5em;
     text-align: center; }
 
+button {
+  font-size: 1.2em;
+  padding: 0.5em 4em;
+  letter-spacing: 0.25em;
+  -webkit-transition: all 0.8s;
+  -moz-transition: all 0.8s;
+  -ms-transition: all 0.8s;
+  -o-transition: all 0.8s;
+  transition: all 0.8s;
+  color: #555555;
+  background-color: #ddd;
+  outline: none; }
+  button:hover {
+    -webkit-box-shadow: 0 5px 12px #bbb;
+    -moz-box-shadow: 0 5px 12px #bbb;
+    box-shadow: 0 5px 12px #bbb; }
+
 /*# sourceMappingURL=main.css.map */

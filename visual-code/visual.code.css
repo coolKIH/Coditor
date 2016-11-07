@@ -1,8 +1,8 @@
+@import url(../main.css);
 div.editor {
   background-color: #ddddd0;
   display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 4em; }
+  flex-wrap: wrap; }
   div.editor textarea {
     flex: 1;
     display: block;
@@ -44,6 +44,13 @@ div.viewer {
     word-break: break-all; }
   div.viewer iframe {
     width: 100%;
+    height: 100%;
     border: 0; }
+
+div.buttonsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 1em; }
 
 /*# sourceMappingURL=visual.code.css.map */

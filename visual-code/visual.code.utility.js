@@ -6,13 +6,14 @@ var editorValues = (function(){
         "{": "}",
         "(": ")",
         "\"":"\"",
-        "'":"'"
+        "'":"'",
+        "<":">"
     };
     var pairCharDataReverse = {
         "}": "{",
         ")": "(",
         "\"":"\"",
-        "'":"'"
+        "'":"'",
     };
     var skippedKeys = ["Shift"];
     var textAreaAttrs = {
@@ -22,11 +23,15 @@ var editorValues = (function(){
         spellcheck: "false",
         autofocus: "autofocus"
     };
+    var warningMessages = {
+       emptyContent: "内容为空. 请输入代码"
+    };
     return {
         pairCharData:pairCharData,
         pairCharDataReverse: pairCharDataReverse,
         skippedKeys:skippedKeys,
-        textAreaAttrs:textAreaAttrs
+        textAreaAttrs:textAreaAttrs,
+        warningMessages:warningMessages
     };
 }());
 var editorFuncs = (function(){
@@ -84,11 +89,96 @@ var editorFuncs = (function(){
             this.setAttribute(property,value);
         }
     }
+    function backToPure() {
+        //make sure every is new to the users.
+        this.open();
+        this.write("");
+        this.close();
+    }
+    function runCodeHTML(e) {
+        var codeHTML = getCodeHTML();
+        var codeJs = getCodeJs();
+        var codeCSS = getCodeCSS();
+        if(!hasContent([codeCSS,codeJs,codeHTML])) {
+            alert(editorValues.warningMessages.emptyContent);
+            return;
+        }
+        var iframe = getIframe();
+        //This below not working...
+        // iframe.src='../resulting-frame/resulting.frame.html';
+
+        var iframeDocument = iframe.contentWindow.document;
+
+        putCSS.call(iframeDocument,codeCSS);
+        putHTML.call(iframeDocument,codeHTML);
+        putJs.call(iframeDocument,codeJs);
+    }
+    function putHTML(toInsertCodeHTML) {
+        this.querySelector('body').innerHTML = toInsertCodeHTML;
+    }
+    function putCSS(toInsertCodeCSS) {
+        var head = this.head || this.querySelector('head');
+        var style = this.createElement('style');
+        style.type='text/css';
+        style.innerText = toInsertCodeCSS;
+        console.log(style)
+        head.appendChild(style);
+    }
+    function putJs(toInsertJs) {
+        var jscript = this.createElement('script');
+        jscript.type='text/javascript';
+        jscript.innerText=toInsertJs;
+        this.querySelector('body').appendChild(jscript);
+    }
+    function getIframe() {
+        return document.querySelector('iframe#resulting-frame');
+    }
+    function hasContent(parameter_arr) {
+        if(!parameter_arr) {
+            return false;
+        }
+        var hasContent = false;
+        parameter_arr.forEach(function(para) {
+            if(para) {
+                hasContent = true;
+            }
+        });
+        return hasContent;
+    }
+    function runCode() {
+        return {
+            runCodeHTML: runCodeHTML
+        };
+    }
+    function getCodeHTML() {
+        return document.querySelector('textarea.code.html').value;
+    }
+    function getCodeJs() {
+        var codeJs =  document.querySelector('textarea.code.js').value;
+        return removeBreakChars(codeJs);
+    }
+    function getCodeCSS() {
+        var codeCSS = document.querySelector('textarea.code.css').value;
+        return removeBreakChars(codeCSS);
+
+    }
+    function removeBreakChars(origin) {
+        return origin.replace(/\n|\r|\r\n/g,"");
+    }
+    function addEventListenerConsiderate(event,listener) {
+        if(this.addEventListener) {
+            this.addEventListener(event,listener);
+        } else if(this.attachEvent) {
+            this.attachEvent((event,listener));
+        }
+    }
     return {
         insertInside:insertInside,
         autoPair:autoPair,
         keydownEventListener:keydownEventListener,
         writeHTML:writeHTML,
-        setAttributes:setAttributes
-    }
+        setAttributes:setAttributes,
+        runCode: runCode,
+        addEventListenerConsiderate: addEventListenerConsiderate
+    };
 }());

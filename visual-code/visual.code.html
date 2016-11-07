@@ -1,17 +1,28 @@
-<div class="editor">
-    <textarea class="code html" placeholder="HTML"></textarea>
-    <textarea class="code css" placeholder="CSS"></textarea>
-    <textarea class="code js" placeholder="Javascript"></textarea>
-</div>
-
-<div class="viewer">
-    <pre class="output"></pre>
-</div>
-<div class="viewer">
-    <iframe id="resulting-frame" src="../resulting-frame/resulting.frame.html">
-        <p>Iframe not supported</p>
-    </iframe>
-</div>
-<script src="visual.code.utility.js"></script>
-<script src="visual.code.js"></script>
-<link rel="stylesheet" href="visual.code.css"/>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Visual Code</title>
+        <link rel="stylesheet" href="visual.code.css"/>
+    </head>
+    <body>
+        <div class="editor">
+            <textarea class="code html" placeholder="HTML"></textarea>
+            <textarea class="code css" placeholder="CSS"></textarea>
+            <textarea class="code js" placeholder="Javascript"></textarea>
+        </div>
+        <div class="buttonsWrapper">
+            <button class="submitCode">测试</button>
+        </div>
+        <div class="viewer iframeContainer">
+            <iframe id="resulting-frame" src="../resulting-frame/resulting.frame.html">
+                <p>Iframe not supported</p>
+            </iframe>
+        </div>
+        <div class="viewer preContainer">
+            <pre class="output"></pre>
+        </div>
+        <!-- should be removed later-->
+        <script src="visual.code.utility.js"></script>
+        <script src="visual.code.js"></script>
+    </body>
+</html>

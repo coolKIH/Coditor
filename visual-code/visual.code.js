@@ -1,30 +1,25 @@
-window.onload = function(){
-
-
+(function(){
     var textareas = document.querySelectorAll('textarea');
-    var resultarea = document.querySelector('div.viewer');
+    var resultarea = document.querySelector('div.viewer.preContainer');
     var resultContainer = resultarea.querySelector('pre');
-
-    var textarea;
+    var runCodeButton = document.querySelector('button.submitCode');
+    var textareaHTML = null;
     textareas.forEach(function(ta){
         editorFuncs.setAttributes.call(ta,editorValues.textAreaAttrs);
+            editorFuncs.addEventListenerConsiderate.call(ta,'keydown',editorFuncs.keydownEventListener);
         if(ta.className.indexOf("html")>-1) {
-            textarea = ta;
+            textareaHTML = ta;
+            editorFuncs.addEventListenerConsiderate.call(ta,'input',inputToOutputEventListener);
         }
     })
     resultarea.className += " green";
 
-    textarea.lastKey = '';
+    textareaHTML.lastKey = '';
 
     function inputToOutputEventListener(e) {
         editorFuncs.writeHTML(resultContainer,this.value);
     }
-    editorFuncs.setAttributes.call(textarea,editorValues.textAreaAttrs);
-    if(textarea.addEventListener) {
-        textarea.addEventListener('input',inputToOutputEventListener);
-        textarea.addEventListener('keydown',editorFuncs.keydownEventListener);
-    } else if(textarea.attachEvent) {
-        textarea.attachEvent('input', inputToOutputEventListener);
-        textarea.attachEvent('keydown',editorFuncs.keydownEventListener)
-    }
-};
+    editorFuncs.setAttributes.call(textareaHTML,editorValues.textAreaAttrs);
+    editorFuncs.addEventListenerConsiderate.call(runCodeButton,'click',editorFuncs.runCode().runCodeHTML)
+
+})();

@@ -1,10 +1,25 @@
 $background-color: #eee;
-
-$lovely-blue: #00cdcd;
+$button-background-color: #ddd;
+$lovely-blue:#00cdcd;
+$deeper-blue:#326ada;
+$mystery-pink: #600d48;
 $main-font-color: #000;
 $title-font-color: #555555;
 
-$main-font-family: "Lucida Console", monospace,Helvetica, sans-serif;
+$main-font-family: "Lucida Console", monospace, ubuntu, Helvetica, sans-serif;
+
+@mixin set-transition-all($time:0.8s){
+  -webkit-transition: all $time;
+  -moz-transition: all $time;
+  -ms-transition: all $time;
+  -o-transition: all $time;
+  transition: all $time;
+}
+@mixin set-box-shadow($place,$hoff,$voff,$weight,$color) {
+  -webkit-box-shadow:$place $hoff $voff $weight $color;
+  -moz-box-shadow: $place $hoff $voff $weight $color;
+  box-shadow: $place $hoff $voff $weight $color;
+}
 
 html,body {
   margin: 0 auto;
@@ -38,5 +53,17 @@ div#headerWrapper {
     text-transform: uppercase;
     line-height: 1.5em;
     text-align: center;
+  }
+}
+button {
+  font-size: 1.2em;
+  padding: 0.5em 4em;
+  letter-spacing: 0.25em;
+  @include set-transition-all();
+  color: $title-font-color;
+  background-color: $button-background-color;
+  outline: none;
+  &:hover {
+    @include set-box-shadow(null,0,5px,12px,#bbb)
   }
 }
