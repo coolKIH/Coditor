@@ -91,20 +91,26 @@ var editorFuncs = (function(){
     }
     function backToPure() {
         //make sure every is new to the users.
+        this.open();
+        this.write("");
+        this.close();
     }
     function runCodeHTML(e) {
         var codeHTML = getCodeHTML();
         var codeJs = getCodeJs();
         var codeCSS = getCodeCSS();
-        console.log(typeof(codeCSS))
         if(!hasContent([codeCSS,codeJs,codeHTML])) {
             alert(editorValues.warningMessages.emptyContent);
             return;
         }
-        var iframeDocument = getIframeDocument();
-        backToPure.call(iframeDocument);
-        putHTML.call(iframeDocument,codeHTML);
+        var iframe = getIframe();
+        //This below not working...
+        // iframe.src='../resulting-frame/resulting.frame.html';
+
+        var iframeDocument = iframe.contentWindow.document;
+
         putCSS.call(iframeDocument,codeCSS);
+        putHTML.call(iframeDocument,codeHTML);
         putJs.call(iframeDocument,codeJs);
     }
     function putHTML(toInsertCodeHTML) {
@@ -123,15 +129,12 @@ var editorFuncs = (function(){
         jscript.type='text/javascript';
         jscript.innerText=toInsertJs;
         this.querySelector('body').appendChild(jscript);
-        console.log(jscript);
     }
-    function getIframeDocument() {
-        var iframe = document.querySelector('iframe#resulting-frame');
-        return iframe.contentWindow.document;
+    function getIframe() {
+        return document.querySelector('iframe#resulting-frame');
     }
     function hasContent(parameter_arr) {
         if(!parameter_arr) {
-            console.log('null array')
             return false;
         }
         var hasContent = false;
