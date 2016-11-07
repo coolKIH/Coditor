@@ -1,6 +1,4 @@
-window.onload = function(){
-
-
+(function(){
     var textareas = document.querySelectorAll('textarea');
     var resultarea = document.querySelector('div.viewer');
     var resultContainer = resultarea.querySelector('pre');
@@ -27,4 +25,4 @@ window.onload = function(){
         textarea.attachEvent('input', inputToOutputEventListener);
         textarea.attachEvent('keydown',editorFuncs.keydownEventListener)
     }
-};
+})();
