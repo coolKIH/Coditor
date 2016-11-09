@@ -117,12 +117,14 @@ var editorFuncs = (function(){
         this.querySelector('body').innerHTML = toInsertCodeHTML;
     }
     function putCSS(toInsertCodeCSS) {
-        var head = this.head || this.querySelector('head');
+        /*var head = this.head || this.querySelector('head');
         var style = this.createElement('style');
         style.type='text/css';
         style.innerText = toInsertCodeCSS;
         console.log(style)
-        head.appendChild(style);
+        head.appendChild(style);*/
+        var styleNode = this.head.querySelector("style#customStyle");
+        styleNode.innerText=toInsertCodeCSS;
     }
     function putJs(toInsertJs) {
         var jscript = this.createElement('script');
