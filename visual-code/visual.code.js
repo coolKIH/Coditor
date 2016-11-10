@@ -12,14 +12,12 @@
             editorFuncs.addEventListenerConsiderate.call(ta,'input',inputToOutputEventListener);
         }
     })
-    resultarea.className += " green";
-
     textareaHTML.lastKey = '';
 
     function inputToOutputEventListener(e) {
         editorFuncs.writeHTML(resultContainer,this.value);
     }
     editorFuncs.setAttributes.call(textareaHTML,editorValues.textAreaAttrs);
-    editorFuncs.addEventListenerConsiderate.call(runCodeButton,'click',editorFuncs.runCode().runCodeHTML)
+    editorFuncs.addEventListenerConsiderate.call(runCodeButton,'click',editorFuncs.runCode().runCodeHTML);
 
 })();

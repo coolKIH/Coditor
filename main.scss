@@ -6,6 +6,9 @@ $mystery-pink: #600d48;
 $main-font-color: #000;
 $title-font-color: #555555;
 
+$error-color:#f00;
+$alright-color:#63e072;
+
 $main-font-family: "Lucida Console", monospace, ubuntu, Helvetica, sans-serif;
 
 @mixin set-transition-all($time:0.8s){
@@ -66,4 +69,7 @@ button {
   &:hover {
     @include set-box-shadow(null,0,5px,12px,#bbb)
   }
+}
+.error {
+  color: $error-color;
 }

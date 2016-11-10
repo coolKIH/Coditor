@@ -89,25 +89,29 @@ var editorFuncs = (function(){
             this.setAttribute(property,value);
         }
     }
-    function backToPure() {
-        //make sure every is new to the users.
-        this.open();
-        this.write("");
-        this.close();
-    }
+
     function runCodeHTML(e) {
         var codeHTML = getCodeHTML();
         var codeJs = getCodeJs();
         var codeCSS = getCodeCSS();
+        var iframe = getIframe();
+        var iframeCtn = document.querySelector('div.viewer.iframeContainer');
+        var iframeDocument = iframe.contentWindow.document;
+
+        iframeCtn.className = iframeCtn.className.replace(/error/g,'');
+        iframeCtn.className += ' alright';
+        iframe.contentWindow.onerror = function(e) {
+            iframeCtn.className = iframeCtn.className.replace(/alright/g,'');
+            iframeCtn.className += ' error';
+            iframeDocument.body.innerHTML = '<em style="color:red">' + e + '</em>';
+        }
+
         if(!hasContent([codeCSS,codeJs,codeHTML])) {
             alert(editorValues.warningMessages.emptyContent);
             return;
         }
-        var iframe = getIframe();
         //This below not working...
         // iframe.src='../resulting-frame/resulting.frame.html';
-
-        var iframeDocument = iframe.contentWindow.document;
 
         putCSS.call(iframeDocument,codeCSS);
         putHTML.call(iframeDocument,codeHTML);
