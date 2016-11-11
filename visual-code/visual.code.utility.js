@@ -26,12 +26,17 @@ var editorValues = (function(){
     var warningMessages = {
        emptyContent: "内容为空. 请输入代码"
     };
+    var buttonStrings = {
+      update: "更新",
+        save:"保存"
+    };
     return {
         pairCharData:pairCharData,
         pairCharDataReverse: pairCharDataReverse,
         skippedKeys:skippedKeys,
         textAreaAttrs:textAreaAttrs,
-        warningMessages:warningMessages
+        warningMessages:warningMessages,
+        buttonStrings: buttonStrings
     };
 }());
 var editorFuncs = (function(){
@@ -94,22 +99,24 @@ var editorFuncs = (function(){
         var codeHTML = getCodeHTML();
         var codeJs = getCodeJs();
         var codeCSS = getCodeCSS();
+        if(!hasContent([codeCSS,codeJs,codeHTML])) {
+            alert(editorValues.warningMessages.emptyContent);
+            return;
+        }
         var iframe = getIframe();
         var iframeCtn = document.querySelector('div.viewer.iframeContainer');
         var iframeDocument = iframe.contentWindow.document;
 
         iframeCtn.className = iframeCtn.className.replace(/error/g,'');
-        iframeCtn.className += ' alright';
+        if(iframeCtn.className.indexOf('alright')<0) {
+            iframeCtn.className += ' alright';
+        }
         iframe.contentWindow.onerror = function(e) {
             iframeCtn.className = iframeCtn.className.replace(/alright/g,'');
             iframeCtn.className += ' error';
             iframeDocument.body.innerHTML = '<em style="color:red">' + e + '</em>';
-        }
+        };
 
-        if(!hasContent([codeCSS,codeJs,codeHTML])) {
-            alert(editorValues.warningMessages.emptyContent);
-            return;
-        }
         //This below not working...
         // iframe.src='../resulting-frame/resulting.frame.html';
 
@@ -178,6 +185,40 @@ var editorFuncs = (function(){
             this.attachEvent((event,listener));
         }
     }
+    function saveCodeListener(e) {
+        var codeHTML = getCodeHTML();
+        var codeCSS = getCodeCSS();
+        var codeJs = getCodeJs();
+        if(!hasContent([codeCSS,codeJs,codeHTML])) {
+            alert(editorValues.warningMessages.emptyContent);
+            return;
+        }
+        var onTopNote = document.body.querySelector('div#onTopNote');
+        elemFadeIn(onTopNote);
+        //save code inside of database
+        if(saveCodeInsideDb()) {
+            onTopNote.className = "success";
+            this.innerText = editorValues.buttonStrings.update;
+        } else {
+            onTopNote.className = "failure";
+        }
+        setTimeout(function() {
+            elemFadeOut(onTopNote)
+        },2000
+        );
+    }
+    function elemFadeIn(elem) {
+        elem.style.display = "block";
+    }
+    function elemFadeOut(elem) {
+        elem.style.display = "none";
+    }
+    function checkIfExists() {
+        return true;
+    }
+    function saveCodeInsideDb() {
+        return true;
+    }
     return {
         insertInside:insertInside,
         autoPair:autoPair,
@@ -185,6 +226,8 @@ var editorFuncs = (function(){
         writeHTML:writeHTML,
         setAttributes:setAttributes,
         runCode: runCode,
-        addEventListenerConsiderate: addEventListenerConsiderate
+        addEventListenerConsiderate: addEventListenerConsiderate,
+        getIFrame:getIframe,
+        saveCode:saveCodeListener
     };
 }());

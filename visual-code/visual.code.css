@@ -1,32 +1,29 @@
 html, body {
-  margin: 0 auto;
+  margin: 0 0;
   padding: 0 0; }
 
 body {
   background: #eee; }
 
 body * {
-  margin: 0 auto;
-  padding: 0 0;
-  border: 0; }
+  margin: 0 0;
+  padding: 0 0; }
 
 div#headerWrapper {
-  display: -webkit-flex;
   display: flex;
-  -ms-flex-direction: column;
-  -webkit-flex-direction: column;
-  flex-direction: column;
   flex-wrap: wrap;
-  align-items: center; }
+  -webkit-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row; }
   div#headerWrapper img {
-    text-align: center;
-    height: 2em;
-    padding: 2em 0 0 0; }
-  div#headerWrapper h1 {
-    color: #555555;
-    text-transform: uppercase;
-    line-height: 1.5em;
+    width: auto;
+    height: 10em;
+    margin: 0; }
+  div#headerWrapper div.slogan {
+    margin: 0;
     text-align: center; }
+    div#headerWrapper div.slogan h1 {
+      line-height: 1.2em; }
 
 button {
   font-size: 1.2em;
@@ -47,6 +44,23 @@ button {
 
 .error {
   color: #f00; }
+
+div#onTopNote {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 1.2em;
+  padding: 0.5em 0 0.5em 0;
+  background-color: #555555;
+  color: whitesmoke;
+  box-shadow: 0 5px 10px #aaa;
+  display: none; }
+  div#onTopNote.failure {
+    background-color: red; }
+  div#onTopNote.success {
+    background-color: #326ada; }
 
 div.editor {
   background-color: #ddddd0;
@@ -89,6 +103,8 @@ div.viewer {
     border: 10px solid #63e072; }
   div.viewer.error {
     border: 10px solid #f00; }
+  div.viewer.preContainer {
+    overflow: auto; }
   div.viewer pre {
     display: block;
     white-space: normal;
@@ -101,7 +117,10 @@ div.viewer {
 div.buttonsWrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  padding: 1em; }
+  padding: 1em;
+  -webkit-justify-content: center;
+  justify-content: center; }
+  div.buttonsWrapper button {
+    margin: 1em; }
 
 /*# sourceMappingURL=visual.code.css.map */

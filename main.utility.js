@@ -28,9 +28,12 @@ var controlFuncs = (function(){
             target.appendChild(div.children[0]);
         }
     }
-
+    function openNewWindow(url,title,attrs) {
+        return window.open(url,title,attrs);
+    }
     return {
         HttpRequestForTemplate: HttpRequestForTemplate,
-        appendHTML: appendHTML
+        appendHTML: appendHTML,
+        openNewWindow:openNewWindow
     }
 })();

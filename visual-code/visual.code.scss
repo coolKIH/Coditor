@@ -70,7 +70,9 @@ div.viewer {
     &.error {
         @include set-border(10px,solid,$error-color)
     }
-
+  &.preContainer {
+    overflow: auto;
+  }
   pre {
     display: block;
     white-space: normal;
@@ -85,6 +87,10 @@ div.viewer {
 div.buttonsWrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   padding: 1em;
+  -webkit-justify-content: center;
+  justify-content: center;
+  button {
+    margin: 1em;
+  }
 }

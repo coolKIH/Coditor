@@ -1,23 +1,33 @@
-(function(){
+window.onload = (function(){
     var textareas = document.querySelectorAll('textarea');
-    var resultarea = document.querySelector('div.viewer.preContainer');
-    var resultContainer = resultarea.querySelector('pre');
+    //var resultarea = document.querySelector('div.viewer.preContainer');
+    //var resultContainer = resultarea.querySelector('pre');
     var runCodeButton = document.querySelector('button.submitCode');
+    var saveCodeButton = document.querySelector('button.saveCode');
     var textareaHTML = null;
     textareas.forEach(function(ta){
         editorFuncs.setAttributes.call(ta,editorValues.textAreaAttrs);
             editorFuncs.addEventListenerConsiderate.call(ta,'keydown',editorFuncs.keydownEventListener);
         if(ta.className.indexOf("html")>-1) {
             textareaHTML = ta;
-            editorFuncs.addEventListenerConsiderate.call(ta,'input',inputToOutputEventListener);
+            //editorFuncs.addEventListenerConsiderate.call(ta,'input',inputToOutputEventListener);
         }
-    })
-    textareaHTML.lastKey = '';
-
-    function inputToOutputEventListener(e) {
-        editorFuncs.writeHTML(resultContainer,this.value);
-    }
-    editorFuncs.setAttributes.call(textareaHTML,editorValues.textAreaAttrs);
+    });
+    var newPageOpener = document.querySelector('button.runInNewPage');
+    /**
+    *function inputToOutputEventListener(e) {
+    *    editorFuncs.writeHTML(resultContainer,this.value);
+    *}
+     **/
     editorFuncs.addEventListenerConsiderate.call(runCodeButton,'click',editorFuncs.runCode().runCodeHTML);
-
+    newPageOpener.addEventListener('click',function() {
+        var newPageWindow = controlFuncs.openNewWindow('','','');
+        var iframe = editorFuncs.getIFrame();
+        var iframeContent = '<!DOCTYPE html><html><head>'+iframe.contentWindow.document.head.innerHTML +
+            '</head><body>' + iframe.contentWindow.document.body.innerHTML + '</body></html>';
+        console.log(iframeContent);
+        newPageWindow.document.write(iframeContent);
+        newPageWindow.focus();
+    });
+    saveCodeButton.addEventListener('click',editorFuncs.saveCode);
 })();

@@ -11,5 +11,4 @@
         console.log("link import not supported");
         controlFuncs.HttpRequestForTemplate(visualCodeWrapper,"visual-code/visual.code.html");
     }
-
 })();

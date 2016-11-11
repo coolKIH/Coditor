@@ -25,37 +25,34 @@ $main-font-family: "Lucida Console", monospace, ubuntu, Helvetica, sans-serif;
 }
 
 html,body {
-  margin: 0 auto;
+  margin: 0 0;
   padding: 0 0;
 }
 body {
   background: $background-color;
 }
-
 body * {
-  margin: 0 auto;
-  padding:0 0;
-  border: 0;
+  margin: 0 0;
+  padding: 0 0;
 }
-
 div#headerWrapper {
-  display: -webkit-flex;
   display: flex;
-  -ms-flex-direction: column;
-  -webkit-flex-direction: column;
-  flex-direction: column;
   flex-wrap: wrap;
-  align-items: center;
+  -webkit-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
   img {
-    text-align: center;
-    height: 2em;
-    padding: 2em 0 0 0;
+    width: auto;
+    height: 10em;
+    margin: 0;
   }
-  h1 {
-    color: $title-font-color;
-    text-transform: uppercase;
-    line-height: 1.5em;
+  div.slogan {
+    margin:0;
     text-align: center;
+
+    h1 {
+      line-height: 1.2em;
+    }
   }
 }
 button {
@@ -72,4 +69,23 @@ button {
 }
 .error {
   color: $error-color;
+}
+div#onTopNote {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 1.2em;
+  padding: 0.5em 0 0.5em 0;
+  background-color: $title-font-color;
+  color: whitesmoke;
+  box-shadow: 0 5px 10px #aaa;
+  display: none;
+  &.failure {
+    background-color: red;
+  }
+  &.success {
+    background-color: $deeper-blue;
+  }
 }

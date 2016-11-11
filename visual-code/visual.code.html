@@ -1,30 +1,27 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Visual Code</title>
-        <link rel="stylesheet" href="visual.code.css"/>
-    </head>
-    <body>
-        <div class="editor">
-            <textarea class="code html" placeholder="HTML"></textarea>
-            <textarea class="code css" placeholder="CSS"></textarea>
-            <textarea class="code js" placeholder="Javascript"></textarea>
-        </div>
-        <div class="buttonsWrapper">
-            <button class="submitCode">测试</button>
-        </div>
-        <div class="viewer iframeContainer">
-            <iframe id="resulting-frame" src="resulting-frame/resulting.frame.html">
-                <p>Iframe not supported</p>
-            </iframe>
-        </div>
-        <div class="viewer preContainer">
-            <pre class="output"></pre>
-        </div>
-        <!-- should be removed later. If removed the component will not work independently -->
-        <!--
-        <script src="visual.code.utility.js"></script>
-        <script src="visual.code.js"></script>
-        -->
-    </body>
-</html>
+<div class="editor">
+    <textarea class="code html" placeholder="HTML"></textarea>
+    <textarea class="code css" placeholder="CSS"></textarea>
+    <textarea class="code js" placeholder="Javascript"></textarea>
+</div>
+<div class="buttonsWrapper">
+    <button class="submitCode">运行</button>
+    <button class="saveCode">保存代码</button>
+</div>
+<div class="viewer iframeContainer">
+    <iframe id="resulting-frame"  src="resulting-frame/resulting.frame.html">
+        <p>Iframe not supported</p>
+    </iframe>
+</div>
+<div class="buttonsWrapper">
+    <button class="runInNewPage">在新窗口打开</button>
+</div>
+<!--
+<div class="viewer preContainer">
+    <pre class="output"></pre>
+</div>
+-->
+<!-- should be removed later. If removed the component will not work independently -->
+<!--
+<script src="visual.code.utility.js"></script>
+<script src="visual.code.js"></script>
+-->
