@@ -1,13 +1,12 @@
-$background-color: #eee;
-$button-background-color: #ddd;
-$lovely-blue:#00cdcd;
+$lovely-blue:#1e90ff;
 $deeper-blue:#326ada;
+$darkred:#853526;
+$lovely-orange:#ffa500;
 $mystery-pink: #600d48;
-$main-font-color: #000;
-$title-font-color: #555555;
+$rice-yellow:#ffeead;
 
-$error-color:#f00;
-$alright-color:#63e072;
+$error-color:$darkred;
+$alright-color:$lovely-blue;
 
 $main-font-family: "Lucida Console", monospace, ubuntu, Helvetica, sans-serif;
 
@@ -29,30 +28,34 @@ html,body {
   padding: 0 0;
 }
 body {
-  background: $background-color;
+  background: $rice-yellow;
 }
 body * {
   margin: 0 0;
   padding: 0 0;
 }
 div#headerWrapper {
-  display: flex;
+  display:flex;
   flex-wrap: wrap;
-  -webkit-flex-direction: row;
-  -webkit-flex-direction: row;
+  justify-content: center;
   flex-direction: row;
-  img {
-    width: auto;
-    height: 10em;
-    margin: 0;
-  }
-  div.slogan {
-    margin:0;
-    text-align: center;
+  margin-bottom: 2em;
+  text-shadow: 0 0 5px #bbb;
 
-    h1 {
-      line-height: 1.2em;
+  div.logo {
+    text-align: center;
+    img {
+      height: 100px;
+      width:auto;
+      margin: -2em;
     }
+    h1.brand {
+      text-transform: capitalize;
+      color: $lovely-blue;
+    }
+  }
+  div.slogan h1{
+    color:$lovely-orange;
   }
 }
 button {
@@ -60,11 +63,13 @@ button {
   padding: 0.5em 4em;
   letter-spacing: 0.25em;
   @include set-transition-all();
-  color: $title-font-color;
-  background-color: $button-background-color;
+  color:white;
+  background-color: $lovely-orange;
   outline: none;
   &:hover {
-    @include set-box-shadow(null,0,5px,12px,#bbb)
+    @include set-box-shadow(null,0,2px,5px,#666);
+    border-radius: 15px;
+    text-shadow: 0 0 10px #555;
   }
 }
 .error {
@@ -78,7 +83,7 @@ div#onTopNote {
   text-align: center;
   font-size: 1.2em;
   padding: 0.5em 0 0.5em 0;
-  background-color: $title-font-color;
+  background-color: $lovely-blue;
   color: whitesmoke;
   box-shadow: 0 5px 10px #aaa;
   display: none;

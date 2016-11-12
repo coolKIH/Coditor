@@ -1,18 +1,15 @@
-$editor-background-color: #ddddd0;
-
-$lovely-blue: #00cdcd;
+@import "../main";
 $textarea-color: #555;
 $code-color: #062f4f;
 
 $code-font-family: Courier, "Lucida Console", monospace;
 
-$textarea-border: 10px solid #eee;
+$textarea-border: 10px solid #f4efcb;
 $textarea-border-transition: border 0.8s;
 @mixin set-border($weight,$shape,$color) {
   border: $weight $shape $color;
 }
-$textarea-border-focus: 10px solid #bbb;
-
+$textarea-border-focus: 10px solid #f3ebb8;
 $textarea-box-shadow: 0 0 2px #aaa;
 
 @mixin change-tab-size($size) {
@@ -20,10 +17,8 @@ $textarea-box-shadow: 0 0 2px #aaa;
   -o-tab-size: $size;
   tab-size: $size;
 }
-@import "../main";
 
 div.editor {
-  background-color: $editor-background-color;
   display: flex;
   flex-wrap: wrap;
   textarea {
