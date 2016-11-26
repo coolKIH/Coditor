@@ -9,7 +9,6 @@
             editorFuncs.addEventListenerConsiderate.call(ta,'keydown',editorFuncs.keydownEventListener);
             if(ta.className.indexOf("html")>-1) {
                 textareaHTML = ta;
-                //editorFuncs.addEventListenerConsiderate.call(ta,'input',inputToOutputEventListener);
             }
         });
     }

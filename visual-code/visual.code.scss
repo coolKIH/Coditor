@@ -42,7 +42,7 @@ div.editor {
     }
 
     &.code {
-      @include change-tab-size(4);
+      @include change-tab-size(2);
       white-space: pre-wrap;
       font-family: $code-font-family;
       color: $code-color;

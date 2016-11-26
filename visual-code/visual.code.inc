@@ -1,3 +1,6 @@
+<div class="projectTitle">
+    
+</div>
 <div class="editor">
     <textarea class="code html" placeholder="HTML"></textarea>
     <textarea class="code css" placeholder="CSS"></textarea>
@@ -15,13 +18,3 @@
 <div class="buttonsWrapper">
     <button class="runInNewPage">在新窗口打开</button>
 </div>
-<!--
-<div class="viewer preContainer">
-    <pre class="output"></pre>
-</div>
--->
-<!-- should be removed later. If removed the component will not work independently -->
-<!--
-<script src="visual.code.utility.js"></script>
-<script src="visual.code.js"></script>
--->

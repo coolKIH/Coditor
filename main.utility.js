@@ -103,7 +103,7 @@ var controlFuncs = (function(){
                     console.log("Problems")
                 }
         }
-        httpRequest.open("POST","HttpResponse/loginConferm.php", true);
+        httpRequest.open("POST","httpResponse/loginConferm.php", true);
         httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         httpRequest.send("account="+acc+"&psw="+psw);
     }

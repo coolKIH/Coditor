@@ -83,8 +83,32 @@ nav#onTopNav ul#navMenu {
   align-items: center; }
   nav#onTopNav ul#navMenu li {
     transition: color 0.3s ease-in-out, border 0.2s ease-in-out;
-    border-bottom: 1.2px #ffeead solid;
-    font-weight: bold; }
+    border-bottom: 1.2px #ffeead solid; }
+    nav#onTopNav ul#navMenu li#userConsole {
+      position: relative; }
+      nav#onTopNav ul#navMenu li#userConsole ul {
+        position: absolute;
+        display: none;
+        min-width: 80px;
+        right: 0;
+        list-style: none;
+        text-align: right;
+        -webkit-transition: display 1s ease-in;
+        -moz-transition: display 1s ease-in;
+        -ms-transition: display 1s ease-in;
+        -o-transition: display 1s ease-in;
+        transition: display 1s ease-in; }
+        nav#onTopNav ul#navMenu li#userConsole ul li {
+          background: antiquewhite;
+          color: #777; }
+          nav#onTopNav ul#navMenu li#userConsole ul li:hover {
+            background: #1e90ff;
+            color: antiquewhite;
+            border: 0; }
+      nav#onTopNav ul#navMenu li#userConsole:hover ul {
+        display: block; }
+      nav#onTopNav ul#navMenu li#userConsole:hover a#navUser {
+        color: #ffa500; }
     nav#onTopNav ul#navMenu li a {
       text-decoration: none;
       color: #cccccc;
@@ -238,9 +262,9 @@ div.editor {
       box-shadow: 0 0 2px #aaa;
       border: 10px solid #f3ebb8; }
     div.editor textarea.code {
-      -moz-tab-size: 4;
-      -o-tab-size: 4;
-      tab-size: 4;
+      -moz-tab-size: 2;
+      -o-tab-size: 2;
+      tab-size: 2;
       white-space: pre-wrap;
       font-family: Courier, "Lucida Console", monospace;
       color: #062f4f; }

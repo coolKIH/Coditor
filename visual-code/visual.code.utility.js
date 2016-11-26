@@ -196,17 +196,28 @@ var editorFuncs = (function(){
         var onTopNote = document.body.querySelector('div#onTopNote');
         elemFadeIn(onTopNote);
         //save code inside of database
-        if(saveCodeInsideDb()) {
-            onTopNote.className = "success";
-            this.innerText = editorValues.buttonStrings.update;
-        } else {
-            onTopNote.className = "failure";
-        }
-        setTimeout(function() {
-            elemFadeOut(onTopNote)
-        },2000
-        );
+        saveCodeInsideDb({"html": codeHTML, "css": codeCSS, "js": codeJs}, function(response) {
+            if(response["check"]=="ok") {
+                onTopNote.className = "success";
+                onTopNote.innerText = "保存成功";
+                this.innerText = editorValues.buttonStrings.update;
+            } else {
+                console.log(response);
+                onTopNote.className = "failure";
+                onTopNote.innerText = "无法保存";
+                setTimeout(function() {
+                    window.location.hash = "popupWrapper";
+                    window.location.reload();
+                },
+                2000);
+            }
+            setTimeout(function () {
+                elemFadeOut(onTopNote)
+            },
+            2000);
+        });
     }
+
     function elemFadeIn(elem) {
         elem.style.display = "block";
     }
@@ -216,8 +227,26 @@ var editorFuncs = (function(){
     function checkIfExists() {
         return true;
     }
-    function saveCodeInsideDb() {
-        return true;
+    function saveCodeInsideDb(codeObj, callback) {
+        var codeObjStr = JSON.stringify(codeObj);
+        var httpRequest = new XMLHttpRequest();
+        if(!httpRequest) {
+            httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        httpRequest.onreadystatechange = function() {
+            if(httpRequest.readyState == XMLHttpRequest.DONE) {
+                if(httpRequest.status == 200) {
+                        var response = httpRequest.responseText;
+                        response = JSON.parse(response);
+                        callback(response);
+                    } else {
+                        console.log("send code data error");
+                }
+            }
+        };
+        httpRequest.open("POST", "httpResponse/saveCode.php", true);
+        httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        httpRequest.send("codeObjStr=" + codeObjStr);
     }
     return {
         insertInside:insertInside,
