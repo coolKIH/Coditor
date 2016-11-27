@@ -1,5 +1,13 @@
-<div class="projectTitle">
-    
+<div class="projectTitleWrapper">
+    <button
+            id="titleDisplayer">无标题项目
+    </button>
+    <div id="projectTitleWriter">
+        <form id="projectTitleForm" method="post">
+            <input name="projectTitle" type="text" /><br/>
+            <input type="submit" style="position: absolute; left: -9999px"/>
+        </form>
+    </div>
 </div>
 <div class="editor">
     <textarea class="code html" placeholder="HTML"></textarea>

@@ -42,7 +42,15 @@ body {
   }
   input {
     outline: none;
+    padding: 15px 20px;
+    color: #777;
+    border: 2px solid white;
+    font-size: 1.1em;
 
+    &:focus {
+      border: 2px solid $lovely-orange;
+      box-shadow: 0 0 5px $lovely-orange;
+    }
   }
 }
 
@@ -275,16 +283,7 @@ div#popupWrapper {
       align-items: center;
       div#formContentWrapper {
         input {
-          padding: 15px 20px;
           width: 80%;
-          color: #777;
-          border: 2px solid white;
-          font-size: 1.1em;
-
-          &:focus {
-            border: 2px solid $lovely-orange;
-            box-shadow: 0 0 5px $lovely-orange;
-          }
         }
         button {
           display: block;
@@ -327,4 +326,16 @@ div#popupWrapper {
 @keyframes spin {
   0% {transform: rotate(0deg);}
   100% {transform: rotate(360deg);}
+}
+div.projectTitleWrapper {
+  margin: 0 0 10px 10px;
+  button#titleDisplayer {
+    padding: 10px 12px;
+  }
+  div#projectTitleWriter {
+    display: none;
+    input[name="projectTitle"] {
+      padding: 10px 12px;
+    }
+  }
 }

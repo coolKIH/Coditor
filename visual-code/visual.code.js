@@ -31,4 +31,29 @@
         saveCodeButton.addEventListener('click',editorFuncs.saveCode);
     }
 
+    var titleDisplayer = document.querySelector("button#titleDisplayer");
+    var projectTitleWriter = document.querySelector("div#projectTitleWriter");
+    var projectTitleForm = document.querySelector("form#projectTitleForm");
+    var projectTitleInput = document.querySelector("input[name='projectTitle']");
+
+    function projecTitleButtonListener() {
+        this.style.display = "none";
+        projectTitleWriter.style.display = "block";
+        projectTitleInput.value = this.innerText.trim();
+        projectTitleInput.focus();
+    }
+    function showProjectTitle() {
+        projectTitleWriter.style.display = "none";
+        titleDisplayer.innerText = projectTitleInput.value.trim() || "无标题项目";
+        titleDisplayer.style.display = "block";
+    }
+    titleDisplayer.onclick = projecTitleButtonListener;
+    projectTitleInput.addEventListener("focusout", showProjectTitle);
+
+    titleDisplayer.addEventListener("mouseover", projecTitleButtonListener);
+    projectTitleForm.onsubmit = function() {
+        showProjectTitle();
+        return false;
+    }
+
 })();

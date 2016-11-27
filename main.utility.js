@@ -94,23 +94,41 @@ var controlFuncs = (function(){
         httpRequest.onreadystatechange = function() {
             if(httpRequest.readyState == XMLHttpRequest.DONE)
                 if(httpRequest.status == 200) {
+                    loader.style.display="none";
                     var responseObj = JSON.parse(httpRequest.responseText);
                     if(responseObj["check"]==="ok") {
                         var username = responseObj["username"];
                         window.location.href="";
+                    } else {
+                        labelAccount.innerText = controlValues.promptMsgs.loginFailure;
+                        console.log(responseObj)
                     }
-                }else {
-                    console.log("Problems")
                 }
         }
-        httpRequest.open("POST","httpResponse/loginConferm.php", true);
+        httpRequest.open("POST","httpResponse/loginConfirm.php", true);
         httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         httpRequest.send("account="+acc+"&psw="+psw);
+    }
+    function userLogout() {
+        var httpRequest = new XMLHttpRequest();
+        if(!httpRequest) {
+            httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        httpRequest.onreadystatechange = function() {
+            if(httpRequest.readyState == XMLHttpRequest.DONE)
+                if(httpRequest.status == 200) {
+                    window.location.reload();
+                }
+        };
+        httpRequest.open("POST", "httpResponse/logout.php", true);
+        httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        httpRequest.send(null);
     }
     return {
         HttpRequestForTemplate: HttpRequestForTemplate,
         appendHTML: appendHTML,
         openNewWindow:openNewWindow,
-        tryToLogin: tryToLogin
+        tryToLogin: tryToLogin,
+        userLogout: userLogout
     }
 })();
