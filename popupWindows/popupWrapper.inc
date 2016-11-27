@@ -25,7 +25,7 @@
     </div>
     <div id="bottomController">
         <div class="titleWrapper">
-            <a id="toRegister" href="#popupWrapper">还没有帐号？马上注册！&#8594;</a>
+            <a id="toRegister" href="#popupWrapper"><span>还没有帐号？马上注册!</span></a>
         </div>
     </div>
 </div>
