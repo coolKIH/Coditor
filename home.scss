@@ -189,7 +189,7 @@ div#popupWrapper {
   transition: opacity 0.5s ease-in;
   div#contentWindow {
     position: fixed;
-    width: 500px;
+    max-width: 500px;
     height: 500px;
     background: whitesmoke;
     top: 50%;
