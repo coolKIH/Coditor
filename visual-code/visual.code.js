@@ -54,9 +54,18 @@
         if(e.code == "Enter" || e.code == "NumpadEnter") {
             showProjectTitle();
         }
+    });
+    titleDisplayer.addEventListener("mouseenter", function() {
+        var self = this;
+        window.countdown = setTimeout(function () {
+            self.click();
+        }, 1000);
+    });
+    titleDisplayer.addEventListener("mouseleave", function() {
+            if(window.countdown) {
+                clearTimeout(window.countdown);
+            }
     })
-
-    titleDisplayer.addEventListener("mouseover", projecTitleButtonListener);
     projectTitleForm.onsubmit = function() {
         showProjectTitle();
         return false;
