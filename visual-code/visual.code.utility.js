@@ -128,12 +128,6 @@ var editorFuncs = (function(){
         this.querySelector('body').innerHTML = toInsertCodeHTML;
     }
     function putCSS(toInsertCodeCSS) {
-        /*var head = this.head || this.querySelector('head');
-        var style = this.createElement('style');
-        style.type='text/css';
-        style.innerText = toInsertCodeCSS;
-        console.log(style)
-        head.appendChild(style);*/
         var styleNode = this.head.querySelector("style#customStyle");
         styleNode.innerText=toInsertCodeCSS;
     }
@@ -212,12 +206,14 @@ var editorFuncs = (function(){
                 saveButton.addEventListener("click", updateCodeListener);
             } else {
                 onTopNote.className = "failure";
-                onTopNote.innerText = "无法保存";
+                onTopNote.innerText = "保存失败";
+                if(response["check"]=="not allowed") {
                 setTimeout(function() {
-                    //window.location.hash = "popupWrapper";
-                    //window.location.reload();
-                },
-                2000);
+                        window.location.hash = "popupWrapper";
+                        window.location.reload();
+                    },
+                    2000);
+                }
             }
             setTimeout(function () {
                 elemFadeOut(onTopNote)

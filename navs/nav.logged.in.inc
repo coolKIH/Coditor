@@ -1,6 +1,6 @@
 <nav id="onTopNav">
     <ul id="navMenu">
-        <li><a href="#">码酷</a></li>
+        <li><a href="macode">码酷</a></li>
         <li><a href="#">编辑器</a></li>
         <li><a href="#">关于</a> </li>
         <li id="userConsole">

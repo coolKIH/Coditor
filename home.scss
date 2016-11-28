@@ -129,9 +129,21 @@ nav#onTopNav {
     justify-content: flex-end;
     align-items: center;
     li {
-      transition: color 0.3s ease-in-out, border 0.2s ease-in-out;
-      border-bottom: 1.2px $rice-yellow solid;
-
+      padding: 2px 5px;
+      -webkit-transition: all 1s;
+      -moz-transition: all 1s;
+      -ms-transition: all 1s;
+      -o-transition: all 1s;
+      transition: all 1s;
+      background: white;
+      border-radius: 15px 15px 8px 8px;
+      &:hover {
+        cursor: pointer;
+        background: $lovely-blue;
+        >a {
+          color: whitesmoke;
+        }
+      }
       &#userConsole {
         position: relative;
         ul {
@@ -141,41 +153,15 @@ nav#onTopNav {
           right: 0;
           list-style: none;
           text-align: right;
-          -webkit-transition: display 1s ease-in;
-          -moz-transition: display 1s ease-in;
-          -ms-transition: display 1s ease-in;
-          -o-transition: display 1s ease-in;
-          transition: display 1s ease-in;
-          li {
-            background: antiquewhite;
-            color: #777;
-            &:hover {
-              background: $lovely-blue;
-              color: antiquewhite;
-              border: 0;
-            }
-          }
         }
         &:hover ul{
           display: block;
         }
-        &:hover a#navUser {
-          color: $lovely-orange;
-        }
       }
       a {
         text-decoration: none;
-        color: #cccccc;
-        font-size: 1em;
+        color: $lovely-orange;
         position: relative;
-        letter-spacing: 2px;
-        &:hover {
-          color: $lovely-orange;
-          cursor: hand;
-        }
-      }
-      &:hover {
-        border-bottom: 1.2px $lovely-orange solid;
       }
     }
   }
@@ -195,7 +181,7 @@ div#popupWrapper {
   transition: opacity 0.5s ease-in;
   div#contentWindow {
     position: fixed;
-    max-width: 350px;
+    width: 350px;
     height: 500px;
     background: whitesmoke;
     top: 50%;
@@ -330,11 +316,13 @@ div.projectTitleWrapper {
   margin: 10px;
   button#titleDisplayer {
     padding: 10px 12px;
+    font-size: 1em;
   }
   div#projectTitleWriter {
     display: none;
     input[name="projectTitle"] {
       padding: 10px 12px;
+      font-size: 1em;
     }
   }
 }

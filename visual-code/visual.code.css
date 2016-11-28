@@ -89,8 +89,19 @@ nav#onTopNav ul#navMenu {
   justify-content: flex-end;
   align-items: center; }
   nav#onTopNav ul#navMenu li {
-    transition: color 0.3s ease-in-out, border 0.2s ease-in-out;
-    border-bottom: 1.2px #ffeead solid; }
+    padding: 2px 5px;
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    -ms-transition: all 1s;
+    -o-transition: all 1s;
+    transition: all 1s;
+    background: white;
+    border-radius: 15px 15px 8px 8px; }
+    nav#onTopNav ul#navMenu li:hover {
+      cursor: pointer;
+      background: #1e90ff; }
+      nav#onTopNav ul#navMenu li:hover > a {
+        color: whitesmoke; }
     nav#onTopNav ul#navMenu li#userConsole {
       position: relative; }
       nav#onTopNav ul#navMenu li#userConsole ul {
@@ -99,34 +110,13 @@ nav#onTopNav ul#navMenu {
         min-width: 80px;
         right: 0;
         list-style: none;
-        text-align: right;
-        -webkit-transition: display 1s ease-in;
-        -moz-transition: display 1s ease-in;
-        -ms-transition: display 1s ease-in;
-        -o-transition: display 1s ease-in;
-        transition: display 1s ease-in; }
-        nav#onTopNav ul#navMenu li#userConsole ul li {
-          background: antiquewhite;
-          color: #777; }
-          nav#onTopNav ul#navMenu li#userConsole ul li:hover {
-            background: #1e90ff;
-            color: antiquewhite;
-            border: 0; }
+        text-align: right; }
       nav#onTopNav ul#navMenu li#userConsole:hover ul {
         display: block; }
-      nav#onTopNav ul#navMenu li#userConsole:hover a#navUser {
-        color: #ffa500; }
     nav#onTopNav ul#navMenu li a {
       text-decoration: none;
-      color: #cccccc;
-      font-size: 1em;
-      position: relative;
-      letter-spacing: 2px; }
-      nav#onTopNav ul#navMenu li a:hover {
-        color: #ffa500;
-        cursor: hand; }
-    nav#onTopNav ul#navMenu li:hover {
-      border-bottom: 1.2px #ffa500 solid; }
+      color: #ffa500;
+      position: relative; }
 
 div#popupWrapper {
   position: fixed;
@@ -143,7 +133,7 @@ div#popupWrapper {
   transition: opacity 0.5s ease-in; }
   div#popupWrapper div#contentWindow {
     position: fixed;
-    max-width: 350px;
+    width: 350px;
     height: 500px;
     background: whitesmoke;
     top: 50%;
@@ -254,11 +244,13 @@ div#popupWrapper {
 div.projectTitleWrapper {
   margin: 10px; }
   div.projectTitleWrapper button#titleDisplayer {
-    padding: 10px 12px; }
+    padding: 10px 12px;
+    font-size: 1em; }
   div.projectTitleWrapper div#projectTitleWriter {
     display: none; }
     div.projectTitleWrapper div#projectTitleWriter input[name="projectTitle"] {
-      padding: 10px 12px; }
+      padding: 10px 12px;
+      font-size: 1em; }
 
 div.editor {
   display: flex;

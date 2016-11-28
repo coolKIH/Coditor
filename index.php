@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <title>Coditor</title>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <!--Clear cache-->
-    <meta http-equiv="cache-control" content="no-cache"/>
     <link rel="icon" href="media/imgs/favicon.ico"/>
     <link rel="stylesheet" href="home.css"/>
     <link rel="stylesheet" href="visual-code/visual.code.css"/>

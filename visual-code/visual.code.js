@@ -52,7 +52,7 @@
     projectTitleInput.addEventListener("focusout", showProjectTitle);
     projectTitleInput.addEventListener("keydown", function (e) {
         if(e.code == "Enter" || e.code == "NumpadEnter") {
-            showProjectTitle()
+            showProjectTitle();
         }
     })
 
