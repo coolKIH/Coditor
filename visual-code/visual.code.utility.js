@@ -185,29 +185,37 @@ var editorFuncs = (function(){
             this.attachEvent((event,listener));
         }
     }
+    function getPrjTitle() {
+        var titleDisplayer = document.querySelector("button#titleDisplayer");
+        return titleDisplayer.innerHTML.trim();
+    }
     function saveCodeListener(e) {
         var codeHTML = getCodeHTML();
         var codeCSS = getCodeCSS();
         var codeJs = getCodeJs();
+        var prjTitle = getPrjTitle();
+
         if(!hasContent([codeCSS,codeJs,codeHTML])) {
             alert(editorValues.warningMessages.emptyContent);
             return;
         }
         var onTopNote = document.body.querySelector('div#onTopNote');
         elemFadeIn(onTopNote);
+        var saveButton = this;
         //save code inside of database
-        saveCodeInsideDb({"html": codeHTML, "css": codeCSS, "js": codeJs}, function(response) {
-            if(response["check"]=="ok") {
+        saveCodeInsideDb({"html": codeHTML, "css": codeCSS, "js": codeJs, "title": prjTitle}, function(response) {
+            if(response && response["check"]=="ok") {
                 onTopNote.className = "success";
                 onTopNote.innerText = "保存成功";
-                this.innerText = editorValues.buttonStrings.update;
+                saveButton.innerText = editorValues.buttonStrings.update;
+                saveButton.removeEventListener("click",saveCodeListener);
+                saveButton.addEventListener("click", updateCodeListener);
             } else {
-                console.log(response);
                 onTopNote.className = "failure";
                 onTopNote.innerText = "无法保存";
                 setTimeout(function() {
-                    window.location.hash = "popupWrapper";
-                    window.location.reload();
+                    //window.location.hash = "popupWrapper";
+                    //window.location.reload();
                 },
                 2000);
             }
@@ -240,13 +248,17 @@ var editorFuncs = (function(){
                         response = JSON.parse(response);
                         callback(response);
                     } else {
-                        console.log("send code data error");
+                        callback(null);
                 }
             }
         };
         httpRequest.open("POST", "httpResponse/saveCode.php", true);
         httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         httpRequest.send("codeObjStr=" + codeObjStr);
+    }
+    function updateCodeListener() {
+        console.log("update code")
+
     }
     return {
         insertInside:insertInside,
@@ -257,6 +269,7 @@ var editorFuncs = (function(){
         runCode: runCode,
         addEventListenerConsiderate: addEventListenerConsiderate,
         getIFrame:getIframe,
-        saveCode:saveCodeListener
+        saveCode:saveCodeListener,
+        updateCode:updateCodeListener
     };
 }());

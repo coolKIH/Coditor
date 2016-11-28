@@ -7,22 +7,28 @@
  */
 session_start();
 $result = [];
-$username = $_SESSION["user"];
-if(!isset($username)) {
+$uname = $_SESSION["user"];
+if(!isset($uname)) {
     $result["check"] = "not allowed";
-    echo json_encode($result);
-    exit(0);
 } else {
     $result["check"] = "ok";
     $codeObjStr = $_POST["codeObjStr"];
     if (isset($codeObjStr)) {
         $codeObj = json_decode($codeObjStr);
+        $html = $codeObj->html;
+        $css = $codeObj->css;
+        $js = $codeObj->js;
+        $title = $codeObj->title;
         require_once ("../mysqli.connect.php");
-        echo json_encode($result);
+        require_once ("../classes/MyProj.php");
+        require_once "../classes/MyCode.php";
+        MyProj::setConn($conn);
+        MyCode::setConn($conn);
+        $myProj = new MyProj($uname,$title,$html,$css,$js);
+        $result["title"] = $title;
     } else {
         $result["check"] = "empty content";
-        echo json_encode($result);
-        exit(1);
     }
 }
+echo json_encode($result);
 ?>

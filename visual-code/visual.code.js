@@ -41,6 +41,7 @@
         projectTitleWriter.style.display = "block";
         projectTitleInput.value = this.innerText.trim();
         projectTitleInput.focus();
+        projectTitleInput.setSelectionRange(0, projectTitleInput.value.length);
     }
     function showProjectTitle() {
         projectTitleWriter.style.display = "none";
@@ -49,6 +50,11 @@
     }
     titleDisplayer.onclick = projecTitleButtonListener;
     projectTitleInput.addEventListener("focusout", showProjectTitle);
+    projectTitleInput.addEventListener("keydown", function (e) {
+        if(e.code == "Enter" || e.code == "NumpadEnter") {
+            showProjectTitle()
+        }
+    })
 
     titleDisplayer.addEventListener("mouseover", projecTitleButtonListener);
     projectTitleForm.onsubmit = function() {
