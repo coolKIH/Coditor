@@ -88,35 +88,31 @@ nav#onTopNav ul#navMenu {
   flex-direction: row;
   justify-content: flex-end;
   align-items: center; }
-  nav#onTopNav ul#navMenu li {
-    padding: 2px 5px;
-    -webkit-transition: all 1s;
-    -moz-transition: all 1s;
-    -ms-transition: all 1s;
-    -o-transition: all 1s;
-    transition: all 1s;
-    background: white;
-    border-radius: 15px 15px 8px 8px; }
-    nav#onTopNav ul#navMenu li:hover {
-      cursor: pointer;
-      background: #1e90ff; }
-      nav#onTopNav ul#navMenu li:hover > a {
-        color: whitesmoke; }
-    nav#onTopNav ul#navMenu li#userConsole {
-      position: relative; }
-      nav#onTopNav ul#navMenu li#userConsole ul {
-        position: absolute;
-        display: none;
-        min-width: 80px;
-        right: 0;
-        list-style: none;
-        text-align: right; }
-      nav#onTopNav ul#navMenu li#userConsole:hover ul {
-        display: block; }
-    nav#onTopNav ul#navMenu li a {
-      text-decoration: none;
+  nav#onTopNav ul#navMenu li#userConsole {
+    position: relative; }
+    nav#onTopNav ul#navMenu li#userConsole ul {
+      position: absolute;
+      display: none;
+      min-width: 80px;
+      right: 0;
+      list-style: none;
+      text-align: right;
+      -webkit-transition: display 1s ease-in;
+      -moz-transition: display 1s ease-in;
+      -ms-transition: display 1s ease-in;
+      -o-transition: display 1s ease-in;
+      transition: display 1s ease-in; }
+    nav#onTopNav ul#navMenu li#userConsole:hover ul {
+      display: block; }
+    nav#onTopNav ul#navMenu li#userConsole:hover a#navUser {
+      color: #ffa500; }
+  nav#onTopNav ul#navMenu li a {
+    text-decoration: none;
+    color: #cccccc;
+    position: relative; }
+    nav#onTopNav ul#navMenu li a:hover {
       color: #ffa500;
-      position: relative; }
+      cursor: pointer; }
 
 div#popupWrapper {
   position: fixed;
@@ -133,7 +129,7 @@ div#popupWrapper {
   transition: opacity 0.5s ease-in; }
   div#popupWrapper div#contentWindow {
     position: fixed;
-    width: 350px;
+    max-width: 350px;
     height: 500px;
     background: whitesmoke;
     top: 50%;
@@ -221,7 +217,7 @@ div#popupWrapper {
         margin: 0 auto;
         margin-top: 1em;
         border: 3px solid whitesmoke;
-        border-radius: 50%;
+        bordphper-radius: 50%;
         border-top: 3px solid #777777;
         -webkit-animation: spin 2s linear infinite;
         animation: spin 2s linear infinite;
@@ -244,12 +240,10 @@ div#popupWrapper {
 div.projectTitleWrapper {
   margin: 10px; }
   div.projectTitleWrapper button#titleDisplayer {
-    padding: 10px 12px;
-    font-size: 1em; }
+    padding: 10px 12px; }
   div.projectTitleWrapper div#projectTitleWriter {
     display: none; }
     div.projectTitleWrapper div#projectTitleWriter input[name="projectTitle"] {
-      padding: 10px 12px;
-      font-size: 1em; }
+      padding: 10px 12px; }
 
 /*# sourceMappingURL=home.css.map */

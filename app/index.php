@@ -1,6 +1,6 @@
 <?php session_start() ?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Coditor</title>
