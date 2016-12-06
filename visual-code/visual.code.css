@@ -27,20 +27,21 @@ div#headerWrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  flex-direction: row;
+  flex-direction: column;
   margin-bottom: 2em;
   text-shadow: 0 0 5px #bbb; }
   div#headerWrapper div.logo {
     text-align: center; }
     div#headerWrapper div.logo img {
-      height: 100px;
+      height: 200px;
       width: auto;
-      margin: -2em; }
+      margin: -60px 0 -100px 0; }
     div#headerWrapper div.logo h1.brand {
       text-transform: capitalize;
       color: #1e90ff; }
   div#headerWrapper div.slogan h1 {
-    color: #ffa500; }
+    color: #ffa500;
+    text-align: center; }
 
 button {
   padding: 0.2em 1em;

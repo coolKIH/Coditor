@@ -22,7 +22,6 @@
             var iframe = editorFuncs.getIFrame();
             var iframeContent = '<!DOCTYPE html><html><head>'+iframe.contentWindow.document.head.innerHTML +
                 '</head><body>' + iframe.contentWindow.document.body.innerHTML + '</body></html>';
-            console.log(iframeContent);
             newPageWindow.document.write(iframeContent);
             newPageWindow.focus();
         });

@@ -1,7 +1,7 @@
 <nav id="onTopNav">
     <ul id="navMenu">
-        <li><a href="macode">码酷</a></li>
-        <li><a href="#">编辑器</a></li>
+        <li><a href="macode.php">码酷</a></li>
+        <li><a href="index.php">编辑器</a></li>
         <li><a href="#">关于</a> </li>
         <li id="userConsole">
             <a id="navUser" href="#"><?php echo $_SESSION["user"] ?></a>

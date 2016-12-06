@@ -58,16 +58,16 @@ div#headerWrapper {
   display:flex;
   flex-wrap: wrap;
   justify-content: center;
-  flex-direction: row;
+  flex-direction: column;//origin column
   margin-bottom: 2em;
   text-shadow: 0 0 5px #bbb;
 
   div.logo {
     text-align: center;
     img {
-      height: 100px;
+      height: 200px;//origin 100px
       width:auto;
-      margin: -2em;
+      margin: -60px 0 -100px 0;//origin -2em
     }
     h1.brand {
       text-transform: capitalize;
@@ -76,6 +76,7 @@ div#headerWrapper {
   }
   div.slogan h1{
     color:$lovely-orange;
+    text-align: center;
   }
 }
 button {
