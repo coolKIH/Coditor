@@ -120,9 +120,9 @@ var editorFuncs = (function(){
         //This below not working...
         // iframe.src='../resulting-frame/resulting.frame.html';
 
-        putCSS.call(iframeDocument,codeCSS);
         putHTML.call(iframeDocument,codeHTML);
-        putJs.call(iframeDocument,codeJs);
+        putCSS.call(iframeDocument,removeBreakChars(codeCSS));
+        putJs.call(iframeDocument,removeBreakChars(codeJs));
     }
     function putHTML(toInsertCodeHTML) {
         this.querySelector('body').innerHTML = toInsertCodeHTML;
@@ -162,11 +162,11 @@ var editorFuncs = (function(){
     }
     function getCodeJs() {
         var codeJs =  document.querySelector('textarea.code.js').value;
-        return removeBreakChars(codeJs);
+        return codeJs;
     }
     function getCodeCSS() {
         var codeCSS = document.querySelector('textarea.code.css').value;
-        return removeBreakChars(codeCSS);
+        return codeCSS;
 
     }
     function removeBreakChars(origin) {
@@ -193,33 +193,59 @@ var editorFuncs = (function(){
             alert(editorValues.warningMessages.emptyContent);
             return;
         }
-        var onTopNote = document.body.querySelector('div#onTopNote');
-        elemFadeIn(onTopNote);
         var saveButton = this;
+        var onTopNote = document.body.querySelector('div#onTopNote');
         //save code inside of database
-        saveCodeInsideDb({"html": codeHTML, "css": codeCSS, "js": codeJs, "title": prjTitle}, function(response) {
-            if(response && response["check"]=="ok") {
-                onTopNote.className = "success";
-                onTopNote.innerText = "保存成功";
-                saveButton.innerText = editorValues.buttonStrings.update;
-                saveButton.removeEventListener("click",saveCodeListener);
-                saveButton.addEventListener("click", updateCodeListener);
-            } else {
-                onTopNote.className = "failure";
-                onTopNote.innerText = "保存失败";
-                if(response["check"]=="not allowed") {
-                setTimeout(function() {
-                        window.location.hash = "popupWrapper";
-                        window.location.reload();
+        if(saveButton.className == "create") {
+            elemFadeIn(onTopNote);
+            saveCodeInsideDb({"html": codeHTML, "css": codeCSS, "js": codeJs, "title": prjTitle}, function(response) {
+                if(response && response["check"]=="ok") {
+                    onTopNote.className = "success";
+                    onTopNote.innerText = "保存成功";
+                    saveButton.innerText = editorValues.buttonStrings.update;
+                    $("div#getProjId").text(response["projId"]);
+                    saveButton.className = "update";
+                } else {
+                    onTopNote.className = "failure";
+                    onTopNote.innerText = "保存失败";
+                    if(response["check"]=="not allowed") {
+                        setTimeout(function() {
+                                window.location.hash = "popupWrapper";
+                                window.location.reload();
+                            },
+                            2000);
+                    }
+                }
+                setTimeout(function () {
+                        elemFadeOut(onTopNote)
                     },
                     2000);
+            });
+        } else  if(saveButton.className == "update"){
+            console.log("update code");
+            elemFadeIn(onTopNote);
+            $.ajax({
+                type: "POST",
+                url: "httpResponse/updateCode.php",
+                data: {
+                    "html": codeHTML,
+                    "css": codeCSS,
+                    "js": codeJs,
+                    "projTitle": prjTitle,
+                    "projId": $("div#getProjId").text()
+                },
+                success:function(result) {
+                    onTopNote.className = "success";
+                    onTopNote.innerText = "更新成功";
+                    setTimeout(function () {
+                            elemFadeOut(onTopNote)
+                        },
+                        2000);
                 }
+
             }
-            setTimeout(function () {
-                elemFadeOut(onTopNote)
-            },
-            2000);
-        });
+            )
+        }
     }
 
     function elemFadeIn(elem) {
@@ -252,10 +278,6 @@ var editorFuncs = (function(){
         httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         httpRequest.send("codeObjStr=" + codeObjStr);
     }
-    function updateCodeListener() {
-        console.log("update code")
-
-    }
     return {
         insertInside:insertInside,
         autoPair:autoPair,
@@ -265,7 +287,6 @@ var editorFuncs = (function(){
         runCode: runCode,
         addEventListenerConsiderate: addEventListenerConsiderate,
         getIFrame:getIframe,
-        saveCode:saveCodeListener,
-        updateCode:updateCodeListener
+        saveCode:saveCodeListener
     };
 }());

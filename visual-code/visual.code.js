@@ -1,7 +1,7 @@
 (function(){
     var textareas = document.querySelectorAll('textarea');
     var runCodeButton = document.querySelector('button.submitCode');
-    var saveCodeButton = document.querySelector('button.saveCode');
+    var saveCodeButton = document.querySelector('button#saveCode');
     var textareaHTML = null;
     if (textareas) {
         textareas.forEach(function(ta){
@@ -28,6 +28,11 @@
     }
     if(saveCodeButton) {
         saveCodeButton.addEventListener('click',editorFuncs.saveCode);
+        if(saveCodeButton.className=="update") {
+            saveCodeButton.innerText = "更新代码"
+        } else if(saveCodeButton.className == "create") {
+            saveCodeButton.innerText = "保存代码"
+        }
     }
 
     var titleDisplayer = document.querySelector("button#titleDisplayer");
@@ -68,6 +73,29 @@
     projectTitleForm.onsubmit = function() {
         showProjectTitle();
         return false;
+    }
+    var projId = document.querySelector("div#getProjId").innerText;
+    if(projId) {
+        $.ajax(
+            {
+                type: "POST",
+                url: "httpResponse/getCode.php",
+                data: {
+                    projId: projId
+                },
+                success: function(result) {
+                    var codeSet = JSON.parse(result);
+                    var htmlCode = codeSet["htmlCode"];
+                    var cssCode = codeSet["cssCode"];
+                    var jsCode = codeSet["jsCode"];
+                    var projTitle = codeSet["projTitle"]
+                    $("textarea.code.html").val(htmlCode)
+                    $("textarea.code.css").val(cssCode)
+                    $("textarea.code.js").val(jsCode)
+                    $("button#titleDisplayer").text(projTitle)
+                }
+            }
+        )
     }
 
 })();

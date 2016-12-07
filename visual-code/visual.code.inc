@@ -16,7 +16,7 @@
 </div>
 <div class="buttonsWrapper">
     <button class="submitCode">运行</button>
-    <button class="saveCode">保存代码</button>
+    <button id="saveCode" class="<?php echo $_SESSION['user']==$_GET['maker']?'update':'create'; ?>">加载中...</button>
 </div>
 <div class="viewer iframeContainer">
     <iframe id="resulting-frame"  src="resulting-frame/resulting.frame.html">

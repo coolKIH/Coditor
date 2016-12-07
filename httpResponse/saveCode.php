@@ -26,6 +26,7 @@ if(!isset($uname)) {
         MyCode::setConn($conn);
         $myProj = new MyProj($uname,$title,$html,$css,$js);
         $result["title"] = $title;
+        $result["projId"] = $myProj->getProjId();
     } else {
         $result["check"] = "empty content";
     }

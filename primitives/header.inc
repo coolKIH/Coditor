@@ -13,7 +13,7 @@
 <div id="popupWrapper">
     <?php include ("popupWindows/popupWrapper.inc"); ?>
 </div>
-<div id="onTopNote">保存成功</div>
+<div id="onTopNote">正在处理...</div>
 <?php
 if(isset( $_SESSION["user"] )) {
     include ("navs/nav.logged.in.inc");
@@ -21,18 +21,10 @@ if(isset( $_SESSION["user"] )) {
     include ("navs/nav.visitors.inc");
 }
 ?>
-<!--
 <div id="headerWrapper">
     <div class="logo">
-        <img alt="logo" src="media/imgs/logo.png"/>
+        <img alt="logo" src="media/imgs/logo-old.png"/>
         <h1 class="brand">Coditor</h1>
-    </div>
-    <div class="slogan"><h1>即时代码编辑器</h1></div>
-</div>
--->
-<div id="headerWrapper">
-    <div class="logo">
-        <img alt="logo" src="media/imgs/logo.png"/>
     </div>
     <div class="slogan"><h1>即时代码编辑器</h1></div>
 </div>

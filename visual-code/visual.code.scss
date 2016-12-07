@@ -33,19 +33,14 @@ div.editor {
     border: $textarea-border;
     transition: $textarea-border-transition;
     resize: none;
-    overflow-x: auto;
-    overflow-y: auto;
+    @include change-tab-size(2);
+    white-space: pre-wrap;
+    font-family: $code-font-family;
+    color: $code-color;
 
     &:focus {
       box-shadow: $textarea-box-shadow;
       border: $textarea-border-focus;
-    }
-
-    &.code {
-      @include change-tab-size(2);
-      white-space: pre-wrap;
-      font-family: $code-font-family;
-      color: $code-color;
     }
     &:nth-child(1):after {
       content: "HTML";
@@ -68,11 +63,6 @@ div.viewer {
   &.preContainer {
     overflow: auto;
   }
-  pre {
-    display: block;
-    white-space: normal;
-    word-break: break-all;
-  }
   iframe {
     width: 100%;
     height: 100%;
@@ -87,5 +77,25 @@ div.buttonsWrapper {
   justify-content: center;
   button {
     margin: 0.2em 1em;
+  }
+}
+div.projectTitleWrapper {
+  margin: 10px;
+  button#titleDisplayer {
+    padding: 5px 12px;
+    font-size: 1em;
+    border-radius: 10px;
+    border: 0;
+  }
+  div#projectTitleWriter {
+    display: none;
+    input[name="projectTitle"] {
+      padding: 5px 12px;
+      font-size: 1em;
+      border-radius: 10px;
+      width: 50%;
+      outline: none;
+      border: 0;
+    }
   }
 }
