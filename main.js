@@ -104,4 +104,46 @@
 			controlFuncs.tryToSignUp();
 		}
 	})
+	var inputSearch = $('input.search');
+	var searchToggle = $("div.searchToggleWrapper");
+
+	function displayFilteredShowcase() {
+		var wanted = inputSearch.val().trim();
+		if(wanted) {
+			document.querySelectorAll("div.tinyVisualCode").forEach(function(tinyVisualCode) {
+				if(tinyVisualCode.className.toLowerCase().indexOf(wanted.toLowerCase()) < 0) {
+					tinyVisualCode.style.display = "none";
+				} else {
+					tinyVisualCode.style.display = "block";
+				}
+			})
+		} else {
+			document.querySelectorAll("div.tinyVisualCode").forEach(function(tinyVisualCode) {
+				tinyVisualCode.style.display = "block";
+			})
+		}
+	}
+	var timeoutId;
+	inputSearch.on("keyup", function() {
+		timeoutId = setTimeout(function() {
+			displayFilteredShowcase()
+		},1000)
+	})
+	inputSearch.on("keydown", function(e) {
+		clearTimeout(timeoutId)
+		if(e.keyCode == 13) {
+			displayFilteredShowcase();
+		}
+	})
+
+	var topSearchWrapper = $("div.topSearchWrapper");
+	var inputSearch = $('input.search');
+	var toggleOn = false;
+	searchToggle.click(function() {
+		toggleOn = !toggleOn;
+		topSearchWrapper.slideToggle("fast")
+		inputSearch.focus()
+		$("div.searchToggleWrapper span").toggleClass("blue orange")
+		$("div.searchToggleWrapper span").toggleClass("top origin")
+	})
 })();

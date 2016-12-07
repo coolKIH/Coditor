@@ -8,6 +8,7 @@ MyProj::setConn($conn);
 ?>
 
 <script>document.querySelector("head title").innerText = "码酷"</script>
+<div class="searchToggleWrapper"><span class="orange origin">&#9906;</span></div>
 <div id="macodeWrapper">
     <?php
     $projects = MyProj::getAllProj();
@@ -19,7 +20,7 @@ MyProj::setConn($conn);
         $maker = $project->getUsername();
         echo
         "
-        <div class='tinyVisualCode' id='{$projectId}'>
+        <div class='tinyVisualCode {$maker}' id='{$projectId}'>
             <a href='index.php?maker={$maker}&view={$projectId}'>
                 <iframe src='about:blank' ></iframe>
                 <div class='overlay'></div>
@@ -29,6 +30,7 @@ MyProj::setConn($conn);
     }
     ?>
 </div>
+<script src="jquery-3.1.1.min.js"></script>
 <script src="main.utility.js"></script>
 <script src="main.js"></script>
 <script src="macode.js"></script>

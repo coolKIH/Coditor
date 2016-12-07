@@ -14,6 +14,9 @@
     <?php include ("popupWindows/popupWrapper.inc"); ?>
 </div>
 <div id="onTopNote">正在处理...</div>
+<div class="topSearchWrapper">
+    <input class="search" placeholder="输入作者筛选" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+</div>
 <?php
 if(isset( $_SESSION["user"] )) {
     include ("navs/nav.logged.in.inc");

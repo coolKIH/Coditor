@@ -29,10 +29,15 @@ div#headerWrapper {
   justify-content: center;
   flex-direction: row;
   margin-bottom: 2em;
-  text-shadow: 0 0 5px #bbb; }
+  text-shadow: 0 0 5px #bbb;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
   div#headerWrapper div.logo {
     display: block;
-    text-align: center; }
+    text-align: center;
+    cursor: pointer; }
     div#headerWrapper div.logo img {
       height: 100px;
       width: auto;
@@ -42,7 +47,8 @@ div#headerWrapper {
       color: #1e90ff; }
   div#headerWrapper div.slogan h1 {
     color: #ffa500;
-    text-align: center; }
+    text-align: center;
+    cursor: pointer; }
 
 button {
   padding: 0.2em 1em;
@@ -270,6 +276,37 @@ div#macodeWrapper {
   width: 100%;
   height: 100%;
   position: absolute; }
+
+div.topSearchWrapper {
+  width: 100%;
+  position: fixed;
+  z-index: 100;
+  display: none;
+  opacity: 0.8; }
+  div.topSearchWrapper input {
+    border: 2px solid #ffa500;
+    width: 100%;
+    padding-left: 2em; }
+
+div.searchToggleWrapper span {
+  font-size: 2.5em;
+  display: inline-block;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  cursor: pointer;
+  color: #ffa500;
+  padding: 5px; }
+  div.searchToggleWrapper span:hover {
+    color: #1e90ff; }
+  div.searchToggleWrapper span.blue {
+    color: #1e90ff; }
+  div.searchToggleWrapper span.top {
+    position: absolute;
+    z-index: 120;
+    top: 0; }
 
 div.editor {
   display: flex;

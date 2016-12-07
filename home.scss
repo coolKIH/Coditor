@@ -61,10 +61,15 @@ div#headerWrapper {
   flex-direction: row;
   margin-bottom: 2em;
   text-shadow: 0 0 5px #bbb;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
   div.logo {
     display: block;
     text-align: center;
+    cursor: pointer;
     img {
       height: 100px;
       width:auto;
@@ -78,6 +83,7 @@ div#headerWrapper {
   div.slogan h1{
     color:$lovely-orange;
     text-align: center;
+    cursor: pointer;
   }
 }
 button {
@@ -347,4 +353,41 @@ div#macodeWrapper {
   width: 100%;
   height: 100%;
   position: absolute;
+}
+div.topSearchWrapper {
+  width: 100%;
+  position: fixed;
+  z-index: 100;
+  display: none;
+  opacity: 0.8;
+  input {
+    border: 2px solid $lovely-orange;
+    width: 100%;
+    padding-left: 2em;
+  }
+}
+div.searchToggleWrapper {
+  span {
+    font-size: 2.5em;
+    display: inline-block;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    cursor: pointer;
+    color: $lovely-orange;
+    padding: 5px;
+    &:hover {
+      color: $lovely-blue;
+    }
+    &.blue {
+      color: $lovely-blue;
+    }
+    &.top {
+      position: absolute;
+      z-index: 120;
+      top: 0;
+    }
+  }
 }
