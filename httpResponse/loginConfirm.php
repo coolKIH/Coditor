@@ -6,13 +6,13 @@
  * Time: 下午10:15
  */
 session_start();
-$account = $_POST["account"].trim();
-$psw = $_POST["psw"].trim();
+require_once ("../mysqli.connect.php");
+$account = mysqli_real_escape_string($conn, $_POST["account"].trim());
+$psw = mysqli_real_escape_string($conn, $_POST["psw"].trim());
 $response = [];
 if($_SESSION["user"]) {
     $response["check"] = "ok";
 } else {
-    require_once ("../mysqli.connect.php");
     if(!$conn) {
         $response["check"] = "db not working";
     } else {

@@ -218,59 +218,59 @@ div#popupWrapper {
       }
 
     }
-    div#bottomController {
-      flex: 1;
-      display: flex;
-      flex-direction: row;
-      font-size: 1.2em;
-      background: whitesmoke;
-      overflow: hidden;
-      a {
-        color: #aaaaaa;
-        &:hover {
-          color: #666;
-          span {
-            padding-right: 20px;
-            position: relative;
-            -webkit-transition: all 1s ease-in-out;
-            -moz-transition: all 1s ease-in-out;
-            -ms-transition: all 1s ease-in-out;
-            -o-transition: all 1s ease-in-out;
-            transition: all 1s ease-in-out;
-            &:after {
-              content: ">>";
-              position: absolute;
-              top: 0;
-            }
-          }
-        }
-      }
-      div.titleWrapper {
-        flex: 1;
-        display: flex;
-        justify-content: flex-end;
-        flex-direction: row;
-        align-items: center;
-      }
-      div.toggleWrapper {
-        flex: 0;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        a#registerEntry {
-          display: block;
-        }
-      }
-    }
-    div#formBlock {
+    div.formBlock {
       flex: 7;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      div#formContentWrapper {
+      div.formContentWrapper {
         input {
           width: 80%;
+        }
+        div.bottomController {
+          margin-top: 1em;
+          display: flex;
+          flex-direction: row;
+          font-size: 1.2em;
+          background: whitesmoke;
+          overflow: hidden;
+          a {
+            color: #aaaaaa;
+            &:hover {
+              color: #666;
+              span {
+                padding-right: 20px;
+                position: relative;
+                -webkit-transition: all 1s ease-in-out;
+                -moz-transition: all 1s ease-in-out;
+                -ms-transition: all 1s ease-in-out;
+                -o-transition: all 1s ease-in-out;
+                transition: all 1s ease-in-out;
+                &:after {
+                  content: ">>";
+                  position: absolute;
+                  top: 0;
+                }
+              }
+            }
+          }
+          div.titleWrapper {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            flex-direction: row;
+            align-items: center;
+          }
+          div.toggleWrapper {
+            flex: 0;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            a#registerEntry {
+              display: block;
+            }
+          }
         }
         button {
           display: block;
@@ -297,6 +297,12 @@ div#popupWrapper {
           animation: spin 2s linear infinite;
           display: none;
         }
+      }
+      &.signup {
+        display: none;
+      }
+      &.login {
+        display: flex;
       }
     }
   }

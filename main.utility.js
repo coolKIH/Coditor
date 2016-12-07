@@ -4,7 +4,12 @@
 var controlValues = (function() {
     var errorMsgs = {
         accountMissing: "请输入用户名或者邮箱",
-        pswMissing: "请输入密码"
+        pswMissing: "请输入密码",
+        usernameMissing: "请输入用户名",
+        emailMissing: "请输入邮箱",
+        emailNotGood: "请输入有效的邮箱地址",
+        usernameExisting: "用户名已经存在",
+        emailExisting: "邮箱已经被注册了"
     };
     var promptMsgs = {
         loggingin: "正在登录",
@@ -17,13 +22,21 @@ var controlValues = (function() {
     }
 })();
 var controlFuncs = (function(){
-    var inputLoginAccount = document.getElementById("account");
-    var inputLoginPsw = document.getElementById("psw");
-    var labelAccount = document.getElementById("labelAccount");
-    var labelPsw = document.getElementById("labelPsw");
+    var inputLoginAccount = document.querySelector("input.account.login");
+    var inputLoginPsw = document.querySelector("input.psw.login");
+    var labelAccount = document.querySelector("label.labelAccount.login");
+    var labelPsw = document.querySelector("label.labelPsw.login")
     var buttonLogin = document.querySelector("button.submit.login");
-    var loader = document.querySelector("div.loader");
-    var navLogin = document.querySelector("a#navLogin");
+    var loginLoader = document.querySelector("div.loader.login");
+
+    var inputSignUpUsername = document.querySelector("input.username.signup")
+    var inputSignUpEmail = document.querySelector("input.email.signup")
+    var inputSignUpPsw = document.querySelector("input.psw.signup")
+    var signUpButton = document.querySelector("button.submit.signup")
+    var labelSignUpUsername = document.querySelector("label.labelUsername.signup");
+    var labelSignUpEmail = document.querySelector("label.labelEmail.signup")
+    var labelSignUpPsw = document.querySelector("label.labelPsw.signup")
+    var signUpLoader = document.querySelector("div.loader.signup")
 
     function sleep(interval) {
         var start = new Date().getTime();
@@ -81,7 +94,7 @@ var controlFuncs = (function(){
         }
         if(Object.keys(errors).length == 0) {
             buttonLogin.value=controlValues.promptMsgs.loggingin;
-            loader.style.display = "block";
+            loginLoader.style.display = "block";
             login(account, psw);
         }
     }
@@ -94,7 +107,7 @@ var controlFuncs = (function(){
         httpRequest.onreadystatechange = function() {
             if(httpRequest.readyState == XMLHttpRequest.DONE)
                 if(httpRequest.status == 200) {
-                    loader.style.display="none";
+                    loginLoader.style.display="none";
                     var responseObj = JSON.parse(httpRequest.responseText);
                     if(responseObj["check"]==="ok") {
                         var username = responseObj["username"];
@@ -124,11 +137,80 @@ var controlFuncs = (function(){
         httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         httpRequest.send(null);
     }
+    function tryToSignUp() {
+        var username = inputSignUpUsername.value.trim()
+        var email = inputSignUpEmail.value.trim()
+        var psw = inputSignUpPsw.value.trim()
+        var errors = {}
+        if(!username) {
+            labelSignUpUsername.innerText = controlValues.errorMsgs.usernameMissing
+            errors.usernameMissing = true
+            inputSignUpUsername.focus()
+        } else {
+            labelSignUpUsername.innerText = ""
+        }
+        if(!email) {
+            labelSignUpEmail.innerText = controlValues.errorMsgs.emailMissing
+            errors.emailMissing = true
+            inputSignUpEmail.focus()
+        } else {
+            labelSignUpEmail.innerText = ""
+            if(!email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+                labelSignUpEmail.innerText = controlValues.errorMsgs.emailNotGood
+                errors.emailNotGood = true
+                inputSignUpEmail.focus()
+            }
+        }
+        if(!psw) {
+            labelSignUpPsw.innerText = controlValues.errorMsgs.pswMissing
+            errors.pswMissing = true
+            inputSignUpPsw.focus()
+        } else {
+            labelSignUpPsw.innerText = ""
+        }
+        if(Object.keys(errors).length < 1) {
+            $.ajax({
+                type: "POST",
+                url: "httpResponse/signup.php",
+                data: {
+                    username: username,
+                    email: email,
+                    password: psw
+                },
+                success: function(response) {
+                    if(response) {
+                        var response = JSON.parse(response)
+                        var errors = {}
+                        if(response["check"] == "ok") {
+                            $("div.formBlock.login").css("display","flex");
+                            $("div.formBlock.signup").css("display", "none");
+                            $("a.welcomeLogin").text("欢迎登录");
+                        } else {
+                            if(response["username"]) {
+                                labelSignUpUsername.innerText = controlValues.errorMsgs.usernameExisting;
+                                inputSignUpUsername.focus()
+                            } else {
+                                labelSignUpUsername.innerText = ""
+                            }
+                            if(response["email"]) {
+                                labelSignUpEmail.innerText = controlValues.errorMsgs.emailExisting;
+                                inputSignUpEmail.focus()
+                            } else {
+                                labelSignUpEmail.innerText = ""
+                            }
+                        }
+                    }
+                }
+            })
+        }
+
+    }
     return {
         HttpRequestForTemplate: HttpRequestForTemplate,
         appendHTML: appendHTML,
         openNewWindow:openNewWindow,
         tryToLogin: tryToLogin,
-        userLogout: userLogout
+        userLogout: userLogout,
+        tryToSignUp: tryToSignUp
     }
 })();

@@ -163,61 +163,61 @@ div#popupWrapper {
         flex: 0; }
         div#popupWrapper div#contentWindow div#topController div.toggleWrapper a.toggle:hover {
           color: #853526; }
-    div#popupWrapper div#contentWindow div#bottomController {
-      flex: 1;
-      display: flex;
-      flex-direction: row;
-      font-size: 1.2em;
-      background: whitesmoke;
-      overflow: hidden; }
-      div#popupWrapper div#contentWindow div#bottomController a {
-        color: #aaaaaa; }
-        div#popupWrapper div#contentWindow div#bottomController a:hover {
-          color: #666; }
-          div#popupWrapper div#contentWindow div#bottomController a:hover span {
-            padding-right: 20px;
-            position: relative;
-            -webkit-transition: all 1s ease-in-out;
-            -moz-transition: all 1s ease-in-out;
-            -ms-transition: all 1s ease-in-out;
-            -o-transition: all 1s ease-in-out;
-            transition: all 1s ease-in-out; }
-            div#popupWrapper div#contentWindow div#bottomController a:hover span:after {
-              content: ">>";
-              position: absolute;
-              top: 0; }
-      div#popupWrapper div#contentWindow div#bottomController div.titleWrapper {
-        flex: 1;
-        display: flex;
-        justify-content: flex-end;
-        flex-direction: row;
-        align-items: center; }
-      div#popupWrapper div#contentWindow div#bottomController div.toggleWrapper {
-        flex: 0;
-        display: flex;
-        flex-direction: row;
-        align-items: center; }
-        div#popupWrapper div#contentWindow div#bottomController div.toggleWrapper a#registerEntry {
-          display: block; }
-    div#popupWrapper div#contentWindow div#formBlock {
+    div#popupWrapper div#contentWindow div.formBlock {
       flex: 7;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center; }
-      div#popupWrapper div#contentWindow div#formBlock div#formContentWrapper input {
+      div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper input {
         width: 80%; }
-      div#popupWrapper div#contentWindow div#formBlock div#formContentWrapper button {
+      div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper div.bottomController {
+        margin-top: 1em;
+        display: flex;
+        flex-direction: row;
+        font-size: 1.2em;
+        background: whitesmoke;
+        overflow: hidden; }
+        div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper div.bottomController a {
+          color: #aaaaaa; }
+          div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper div.bottomController a:hover {
+            color: #666; }
+            div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper div.bottomController a:hover span {
+              padding-right: 20px;
+              position: relative;
+              -webkit-transition: all 1s ease-in-out;
+              -moz-transition: all 1s ease-in-out;
+              -ms-transition: all 1s ease-in-out;
+              -o-transition: all 1s ease-in-out;
+              transition: all 1s ease-in-out; }
+              div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper div.bottomController a:hover span:after {
+                content: ">>";
+                position: absolute;
+                top: 0; }
+        div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper div.bottomController div.titleWrapper {
+          flex: 1;
+          display: flex;
+          justify-content: flex-end;
+          flex-direction: row;
+          align-items: center; }
+        div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper div.bottomController div.toggleWrapper {
+          flex: 0;
+          display: flex;
+          flex-direction: row;
+          align-items: center; }
+          div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper div.bottomController div.toggleWrapper a#registerEntry {
+            display: block; }
+      div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper button {
         display: block;
         margin: 0 auto;
         background: white;
         color: #777;
         border: 5px solid whitesmoke; }
-        div#popupWrapper div#contentWindow div#formBlock div#formContentWrapper button:hover {
+        div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper button:hover {
           background: #ffeead;
           border: 5px solid #ffeead;
           color: #555; }
-      div#popupWrapper div#contentWindow div#formBlock div#formContentWrapper div.loader {
+      div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper div.loader {
         width: 38px;
         height: 38px;
         margin: 0 auto;
@@ -228,6 +228,10 @@ div#popupWrapper {
         -webkit-animation: spin 2s linear infinite;
         animation: spin 2s linear infinite;
         display: none; }
+      div#popupWrapper div#contentWindow div.formBlock.signup {
+        display: none; }
+      div#popupWrapper div#contentWindow div.formBlock.login {
+        display: flex; }
   div#popupWrapper:target {
     opacity: 1;
     visibility: visible;

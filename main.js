@@ -63,8 +63,8 @@
 	  };
 	}
     var visualCodeWrapper = document.body.querySelector("div#visualCodeWrapper");
-    var inputLoginAccount = document.getElementById("account");
-    var inputLoginPsw = document.getElementById("psw");
+    var inputLoginAccount = document.querySelector("input.account.login");
+    var inputLoginPsw = document.querySelector("input.psw.login");
     var loginButton = document.querySelector("button.submit.login");
     var logoutAlias = document.querySelector("a#logout");
 
@@ -81,4 +81,27 @@
             controlFuncs.tryToLogin();
         }
     })
+	$("a#toRegister").click(function() {
+		$("div.formBlock.signup").css("display", "flex");
+		$("div.formBlock.login").css("display","none");
+		$("a.welcomeLogin").text("欢迎注册")
+	})
+	$("a#toLogin").click(function() {
+		$("div.formBlock.login").css("display","flex");
+		$("div.formBlock.signup").css("display", "none");
+		$("a.welcomeLogin").text("欢迎登录")
+	})
+
+	var inputSignUpUsername = document.querySelector("input.username.signup")
+	var inputSignUpEmail = document.querySelector("input.email.signup")
+	var inputSignUpPsw = document.querySelector("input.psw.signup")
+
+	var signUpButton = document.querySelector("button.submit.signup")
+
+	signUpButton.addEventListener("click", controlFuncs.tryToSignUp)
+	inputSignUpPsw.addEventListener("keydown", function(e) {
+		if(e.code == "Enter" || e.code == "NumpadEnter") {
+			controlFuncs.tryToSignUp();
+		}
+	})
 })();
