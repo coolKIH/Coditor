@@ -13,6 +13,7 @@
 <div id="popupWrapper">
     <?php include ("popupWindows/popupWrapper.inc"); ?>
 </div>
+<div id="pageWrapper">
 <div id="onTopNote">正在处理...</div>
 <div class="topSearchWrapper">
     <input class="search" placeholder="输入作者筛选" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
@@ -26,8 +27,7 @@ if(isset( $_SESSION["user"] )) {
 ?>
 <div id="headerWrapper">
     <div class="logo">
-        <img alt="logo" src="media/imgs/logo-old.png"/>
-        <h1 class="brand">Coditor</h1>
+        <img alt="logo" src="media/imgs/coditor1.png"/>
     </div>
     <div class="slogan"><h1>即时代码编辑器</h1></div>
 </div>

@@ -72,7 +72,6 @@ var editorFuncs = (function(){
             var lineNum = wrapNum + 1;
             e.preventDefault();
         }else if(key in pairCharDataReverse) {
-            console.log(key,this.lastKey);
             var leftPair = pairCharDataReverse[key];
             if(this.lastKey === leftPair) {
                 this.selectionStart = this.selectionEnd = start +1;
@@ -205,6 +204,7 @@ var editorFuncs = (function(){
                     saveButton.innerText = editorValues.buttonStrings.update;
                     $("div#getProjId").text(response["projId"]);
                     saveButton.className = "update";
+                    window.location.href='index.php?maker=' + response['maker'] + '&view='+response['projId']
                 } else {
                     onTopNote.className = "failure";
                     onTopNote.innerText = "保存失败";
@@ -222,7 +222,6 @@ var editorFuncs = (function(){
                     2000);
             });
         } else  if(saveButton.className == "update"){
-            console.log("update code");
             elemFadeIn(onTopNote);
             $.ajax({
                 type: "POST",

@@ -75,7 +75,7 @@
         return false;
     }
     var projId = document.querySelector("div#getProjId").innerText;
-    if(projId) {
+    if(projId!='') {
         $.ajax(
             {
                 type: "POST",
@@ -83,19 +83,44 @@
                 data: {
                     projId: projId
                 },
-                success: function(result) {
-                    var codeSet = JSON.parse(result);
-                    var htmlCode = codeSet["htmlCode"];
-                    var cssCode = codeSet["cssCode"];
-                    var jsCode = codeSet["jsCode"];
-                    var projTitle = codeSet["projTitle"]
-                    $("textarea.code.html").val(htmlCode)
-                    $("textarea.code.css").val(cssCode)
-                    $("textarea.code.js").val(jsCode)
-                    $("button#titleDisplayer").text(projTitle)
+                success: function(res) {
+                    var response = JSON.parse(res);
+                    if(response['result']=='failure') {
+                        window.location.href="index.php"
+                    } else {
+                        var htmlCode = response["htmlCode"];
+                        var cssCode = response["cssCode"];
+                        var jsCode = response["jsCode"];
+                        var projTitle = response["projTitle"]
+                        $("textarea.code.html").val(htmlCode)
+                        $("textarea.code.css").val(cssCode)
+                        $("textarea.code.js").val(jsCode)
+                        $("button#titleDisplayer").text(projTitle)
+                    }
                 }
             }
         )
     }
+    $("button.deleteProj").click(function() {
+        var answer = confirm("请问你真的要删除此项目吗？")
+        if(answer==true) {
+            var projId = $("div#getProjId").text()
+            $.ajax(
+                {
+                    type: "POST",
+                    url: "httpResponse/deleteCode.php",
+                    data: {
+                        projId: projId
+                    },
+                    success: function(response) {
+                        if(response == "success") {
+                            window.location.href="macode.php"
+                        }
+                    }
 
+                }
+            )
+
+        }
+    })
 })();

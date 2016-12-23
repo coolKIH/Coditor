@@ -12,20 +12,25 @@ require_once ("../classes/MyProj.php");
 if(!$conn) exit(0);
 MyCode::setConn($conn);
 MyProj::setConn($conn);
-$project = new MyProj($projId);
-$projTitle = $project->getTitle();
-$htmlId = $project->getHtmlId();
-$htmlCode = (new MyCode($htmlId))->getCodeText();
-$cssId = $project->getCssId();
-$cssCode = (new MyCode($cssId))->getCodeText();
-$jsId = $project->getJsId();
-$jsCode = (new MyCode($jsId))->getCodeText();
-$code = [];
-$code["htmlCode"] = $htmlCode;
-$code["cssCode"] = $cssCode;
-$code["jsCode"] = $jsCode;
-$code["projTitle"] = $projTitle;
+if(MyProj::exists($projId)) {
+    $project = new MyProj($projId);
+    $projTitle = $project->getTitle();
+    $htmlId = $project->getHtmlId();
+    $htmlCode = (new MyCode($htmlId))->getCodeText();
+    $cssId = $project->getCssId();
+    $cssCode = (new MyCode($cssId))->getCodeText();
+    $jsId = $project->getJsId();
+    $jsCode = (new MyCode($jsId))->getCodeText();
+    $code = [];
+    $code["htmlCode"] = $htmlCode;
+    $code["cssCode"] = $cssCode;
+    $code["jsCode"] = $jsCode;
+    $code["projTitle"] = $projTitle;
 
-$response = json_encode($code);
+    $response = json_encode($code);
+} else {
+    $error['result']='failure';
+    $response = json_encode($error);
+}
 echo $response;
 ?>

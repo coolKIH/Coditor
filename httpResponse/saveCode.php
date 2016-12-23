@@ -27,6 +27,7 @@ if(!isset($uname)) {
         $myProj = new MyProj($uname,$title,$html,$css,$js);
         $result["title"] = $title;
         $result["projId"] = $myProj->getProjId();
+        $result['maker'] = $myProj->getUsername();
     } else {
         $result["check"] = "empty content";
     }

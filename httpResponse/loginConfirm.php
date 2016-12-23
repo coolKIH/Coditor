@@ -7,10 +7,9 @@
  */
 session_start();
 require_once ("../mysqli.connect.php");
-$account = mysqli_real_escape_string($conn, $_POST["account"].trim());
-$psw = mysqli_real_escape_string($conn, $_POST["psw"].trim());
-$response = [];
-if($_SESSION["user"]) {
+$account = mysqli_real_escape_string($conn, $_POST["account"].trim(' '));
+$psw = mysqli_real_escape_string($conn, $_POST["psw"].trim(' '));
+if(isset($_SESSION["user"])) {
     $response["check"] = "ok";
 } else {
     if(!$conn) {

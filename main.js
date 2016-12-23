@@ -127,7 +127,7 @@
 	inputSearch.on("keyup", function() {
 		timeoutId = setTimeout(function() {
 			displayFilteredShowcase()
-		},1000)
+		},500)
 	})
 	inputSearch.on("keydown", function(e) {
 		clearTimeout(timeoutId)
@@ -143,7 +143,64 @@
 		toggleOn = !toggleOn;
 		topSearchWrapper.slideToggle("fast")
 		inputSearch.focus()
-		$("div.searchToggleWrapper span").toggleClass("blue orange")
-		$("div.searchToggleWrapper span").toggleClass("top origin")
+	//	$("div.searchToggleWrapper span").toggleClass("blue orange")
+	//	$("div.searchToggleWrapper span").toggleClass("origin")
+
 	})
+	$("div.likeit a.enabled").click(
+		function() {
+			if($("div.likeit a.enabled").hasClass("notliked")) {
+                $.ajax({
+                    type: "POST",
+                    url: "httpResponse/like.php",
+                    data: {
+                        "projId": $('div#getProjId').text(),
+                        "action": "add"
+                    },
+                    success: function(response) {
+                        if(response == "success") {
+                            $("div.likeit a").removeClass('notliked');
+                            $("div.likeit a").addClass('liked');
+                            $("strong.likeNum").text( parseInt($("strong.likeNum").text()) + 1);
+                        }
+                    }
+                })
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "httpResponse/like.php",
+                    data: {
+                        "projId": $('div#getProjId').text(),
+                        "action": "remove"
+                    },
+                    success: function(response) {
+                        if(response == "success") {
+                            $("div.likeit a").removeClass('liked');
+                            $("div.likeit a").addClass('notliked');
+                            $("strong.likeNum").text( parseInt($("strong.likeNum").text()) - 1 );
+                        }
+                    }
+                })
+            }
+		}
+		)
+    $("div.likeit a.disabled").click(function() {
+        $("div#onTopNote").text("请登录之后点赞")
+        $("div#onTopNote").slideToggle();
+        $("div.likeit a.disabled").css("pointer-events", "none")
+        setTimeout(function() {
+            $("div#onTopNote").slideToggle("fast", "swing", function() {
+                $("div#onTopNote").text("正在处理");
+                $("div.likeit a.disabled").css("pointer-events", "auto")
+            });
+        }, 1000)
+    })
+	currentpage = $("div#currentpage").text();
+	pagecount = $("div#pagecount").text();
+	if(currentpage != pagecount) {
+		$("div.switchPages.right").css("display", "block")
+	}
+	if(currentpage != 1) {
+		$("div.switchPages.left").css("display", "block")
+	}
 })();

@@ -108,6 +108,7 @@ var controlFuncs = (function(){
             if(httpRequest.readyState == XMLHttpRequest.DONE)
                 if(httpRequest.status == 200) {
                     loginLoader.style.display="none";
+					console.log(httpRequest.responseText)
                     var responseObj = JSON.parse(httpRequest.responseText);
                     if(responseObj["check"]==="ok") {
                         var username = responseObj["username"];

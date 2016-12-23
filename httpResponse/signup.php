@@ -9,9 +9,9 @@ require_once ("../mysqli.connect.php");
  */
 $result = [];
 $result["check"] = "ok";
-$username = mysqli_real_escape_string($conn, $_POST["username"].trim());
-$email = mysqli_real_escape_string($conn, $_POST["email"].trim());
-$password = mysqli_real_escape_string($conn, $_POST["password"].trim());
+$username = mysqli_real_escape_string($conn, $_POST["username"].trim(' '));
+$email = mysqli_real_escape_string($conn, $_POST["email"].trim(' '));
+$password = mysqli_real_escape_string($conn, $_POST["password"].trim(' '));
 if($conn) {
     $q = "SELECT * FROM myUser WHERE username='{$username}'";
     $r = mysqli_query($conn, $q);

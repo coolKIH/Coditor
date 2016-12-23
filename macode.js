@@ -11,6 +11,7 @@
                 '<head>' +
                 '<title></title>' +
                 '<meta charset="utf-8"/> ' +
+                '<style>body {overflow: hidden}</style>'+
                 '<style id="myStyle"></style>' +
                 '</head>' +
                 '<body>' +
@@ -32,6 +33,7 @@
                         //Disabled js
                         // myDocument.body.querySelector("script#myJsCode").innerText = codeSet["jsCode"]
                         myDocument.close()
+                        tinyVisualCode.className += " display"
                     }
                 }
             }

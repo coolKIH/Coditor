@@ -1,5 +1,5 @@
 <?php include ("primitives/header.inc"); ?>
-<div style="display:none" id="getProjId"><?php echo $_GET["view"]; ?></div>
+<div style="display:none" id="getProjId"><?php echo isset($_GET["view"])?$_GET["view"]:''; ?></div>
 <div id="visualCodeWrapper">
     <?php include ("visual-code/visual.code.inc");?>
 </div>

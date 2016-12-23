@@ -1,72 +1,85 @@
-html, body {
-  margin: 0 0;
-  padding: 0 0; }
-
 body {
-  background: #ffeead; }
-  body * {
-    border: 0;
-    padding: 0;
-    margin: 0; }
-  body a {
-    text-decoration: none;
-    text-underline: none;
-    color: black;
-    cursor: hand; }
-  body input {
-    outline: none;
-    padding: 15px 20px;
-    color: #777;
-    border: 2px solid white;
-    font-size: 1.1em; }
-    body input:focus {
-      border: 2px solid #ffa500;
-      box-shadow: 0 0 5px #ffa500; }
-
+  background: floralwhite url("media/imgs/bg3.png");
+  margin: auto; }
+body * {
+  border: 0;
+  padding: 0; }
+body a {
+  text-decoration: none;
+  color: black;
+  cursor: hand; }
+body input {
+  outline: none;
+  padding: 15px 20px;
+  color: #777;
+  border: 2px solid white;
+  font-size: 1em; }
+body input:focus {
+  border: 2px solid #fa8b60;
+  box-shadow: 0 0 2px #fa8b60;
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #aaaaaa;
+}
+::-moz-placeholder { /* Firefox 19+ */
+    color: #aaaaaa;
+}
+:-ms-input-placeholder { /* IE 10+ */
+    color: #aaaaaa;
+}
+:-moz-placeholder { /* Firefox 18- */
+    color: #aaaaaa;
+}
 div#headerWrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
   margin-bottom: 2em;
-  text-shadow: 0 0 5px #bbb; }
-  div#headerWrapper div.logo {
-    display: none;
-    text-align: center; }
-    div#headerWrapper div.logo img {
-      height: 200px;
-      width: auto;
-      margin: -60px 0 -100px 0; }
-    div#headerWrapper div.logo h1.brand {
-      text-transform: capitalize;
-      color: #1e90ff; }
-  div#headerWrapper div.slogan h1 {
-    color: #ffa500;
-    text-align: center; }
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+div#headerWrapper div.logo {
+  display: block;
+  cursor: pointer; }
+div#headerWrapper div.logo img {
+  height: 100px;
+  width: auto;
+  margin: -1.8em; }
+div#headerWrapper div.slogan {
+  padding: 10px;
+  color: #733644;
+}
+div#headerWrapper div.slogan img{
+  width: 300px;
+  cursor: pointer; }
+
 
 button {
-  padding: 0.2em 1em;
+  padding: 0.2em 0.4em;
   -webkit-transition: box-shadow 0.5s;
   -moz-transition: box-shadow 0.5s;
   -ms-transition: box-shadow 0.5s;
   -o-transition: box-shadow 0.5s;
   transition: box-shadow 0.6s;
   color: white;
-  background-color: #ffa500;
+  background-color: rgba(61,141,232,0.8);
   outline: none;
   cursor: pointer;
-  font-size: 1.2em;
+  font-size: 1.5em;
   letter-spacing: 0; }
   button:hover {
-    -webkit-box-shadow: 0 14px 13px -1px #777;
-    -moz-box-shadow: 0 14px 13px -1px #777;
-    box-shadow: 0 10px 20px -1px #777; }
+    color: #fff;
+    background: #000;
+    transition:0.5s all;
+  }
 
 .error {
   color: #853526; }
 
 div#onTopNote {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -101,9 +114,9 @@ nav#onTopNav ul#navMenu {
     border-radius: 15px 15px 8px 8px; }
     nav#onTopNav ul#navMenu li:hover {
       cursor: pointer;
-      background: #1e90ff; }
+      }
       nav#onTopNav ul#navMenu li:hover > a {
-        color: whitesmoke; }
+        color: #181818; }
     nav#onTopNav ul#navMenu li#userConsole {
       position: relative; }
       nav#onTopNav ul#navMenu li#userConsole ul {
@@ -117,7 +130,7 @@ nav#onTopNav ul#navMenu {
         display: block; }
     nav#onTopNav ul#navMenu li a {
       text-decoration: none;
-      color: #ffa500;
+      color: #bf7793;
       position: relative; }
 
 div#popupWrapper {
@@ -126,15 +139,15 @@ div#popupWrapper {
   height: 100%;
   background: rgba(0, 0, 0, 0.6) repeat;
   visibility: hidden;
-  z-index: 99;
   opacity: 0;
+  z-index: 99;
   -webkit-transition: opacity 0.8s ease-in;
   -moz-transition: opacity 0.8s ease-in;
   -ms-transition: opacity 0.8s ease-in;
   -o-transition: opacity 0.8s ease-in;
   transition: opacity 0.5s ease-in; }
   div#popupWrapper div#contentWindow {
-    position: fixed;
+    position: absolute;
     width: 350px;
     height: 500px;
     background: whitesmoke;
@@ -150,9 +163,7 @@ div#popupWrapper {
       flex-direction: row;
       font-size: 1.25em;
       flex: 1;
-      background: #ffeead; }
-      div#popupWrapper div#contentWindow div#topController a {
-        color: #776; }
+      background: #eeeeee; }
       div#popupWrapper div#contentWindow div#topController div.titleWrapper {
         flex: 1;
         display: flex;
@@ -163,61 +174,61 @@ div#popupWrapper {
         flex: 0; }
         div#popupWrapper div#contentWindow div#topController div.toggleWrapper a.toggle:hover {
           color: #853526; }
-    div#popupWrapper div#contentWindow div#bottomController {
-      flex: 1;
-      display: flex;
-      flex-direction: row;
-      font-size: 1.2em;
-      background: whitesmoke;
-      overflow: hidden; }
-      div#popupWrapper div#contentWindow div#bottomController a {
-        color: #aaaaaa; }
-        div#popupWrapper div#contentWindow div#bottomController a:hover {
-          color: #666; }
-          div#popupWrapper div#contentWindow div#bottomController a:hover span {
-            padding-right: 20px;
-            position: relative;
-            -webkit-transition: all 1s ease-in-out;
-            -moz-transition: all 1s ease-in-out;
-            -ms-transition: all 1s ease-in-out;
-            -o-transition: all 1s ease-in-out;
-            transition: all 1s ease-in-out; }
-            div#popupWrapper div#contentWindow div#bottomController a:hover span:after {
-              content: ">>";
-              position: absolute;
-              top: 0; }
-      div#popupWrapper div#contentWindow div#bottomController div.titleWrapper {
-        flex: 1;
-        display: flex;
-        justify-content: flex-end;
-        flex-direction: row;
-        align-items: center; }
-      div#popupWrapper div#contentWindow div#bottomController div.toggleWrapper {
-        flex: 0;
-        display: flex;
-        flex-direction: row;
-        align-items: center; }
-        div#popupWrapper div#contentWindow div#bottomController div.toggleWrapper a#registerEntry {
-          display: block; }
-    div#popupWrapper div#contentWindow div#formBlock {
+    div#popupWrapper div#contentWindow div.formBlock {
       flex: 7;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center; }
-      div#popupWrapper div#contentWindow div#formBlock div#formContentWrapper input {
+      div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper input {
         width: 80%; }
-      div#popupWrapper div#contentWindow div#formBlock div#formContentWrapper button {
+      div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper div.bottomController {
+        margin-top: 1em;
+        display: flex;
+        flex-direction: row;
+        font-size: 1.2em;
+        background: whitesmoke;
+        overflow: hidden; }
+        div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper div.bottomController a {
+          color: #aaaaaa; }
+          div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper div.bottomController a:hover {
+            color: #666; }
+            div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper div.bottomController a:hover span {
+              padding-right: 20px;
+              position: relative;
+              -webkit-transition: all 1s ease-in-out;
+              -moz-transition: all 1s ease-in-out;
+              -ms-transition: all 1s ease-in-out;
+              -o-transition: all 1s ease-in-out;
+              transition: all 1s ease-in-out; }
+              div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper div.bottomController a:hover span:after {
+                content: ">>";
+                position: absolute;
+                top: 0; }
+        div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper div.bottomController div.titleWrapper {
+          flex: 1;
+          display: flex;
+          justify-content: flex-end;
+          flex-direction: row;
+          align-items: center; }
+        div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper div.bottomController div.toggleWrapper {
+          flex: 0;
+          display: flex;
+          flex-direction: row;
+          align-items: center; }
+          div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper div.bottomController div.toggleWrapper a#registerEntry {
+            display: block; }
+      div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper button {
         display: block;
         margin: 0 auto;
         background: white;
         color: #777;
         border: 5px solid whitesmoke; }
-        div#popupWrapper div#contentWindow div#formBlock div#formContentWrapper button:hover {
-          background: #ffeead;
-          border: 5px solid #ffeead;
+        div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper button:hover {
+          background: #3F2860;
+          border: 5px solid #3F2860;
           color: #555; }
-      div#popupWrapper div#contentWindow div#formBlock div#formContentWrapper div.loader {
+      div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper div.loader {
         width: 38px;
         height: 38px;
         margin: 0 auto;
@@ -228,6 +239,14 @@ div#popupWrapper {
         -webkit-animation: spin 2s linear infinite;
         animation: spin 2s linear infinite;
         display: none; }
+      div#popupWrapper div#contentWindow div.formBlock.signup {
+        display: none; }
+      div#popupWrapper div#contentWindow div.formBlock.login {
+        display: flex; }
+div#popupWrapper div#contentWindow div.formBlock div.formContentWrapper button.submit:hover {
+  background-color: black;
+  color: white;
+}
   div#popupWrapper:target {
     opacity: 1;
     visibility: visible;
@@ -243,27 +262,108 @@ div#popupWrapper {
     transform: rotate(0deg); }
   100% {
     transform: rotate(360deg); } }
-div.projectTitleWrapper {
-  margin: 10px; }
-  div.projectTitleWrapper button#titleDisplayer {
-    padding: 10px 12px;
-    font-size: 1em; }
-  div.projectTitleWrapper div#projectTitleWriter {
-    display: none; }
-    div.projectTitleWrapper div#projectTitleWriter input[name="projectTitle"] {
-      padding: 10px 12px;
-      font-size: 1em; }
-
 div#macodeWrapper {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap; }
-  div#macodeWrapper div.tinyVisualCode {
-    height: 300px;
-    min-width: 300px;
-    flex: 1;
-    background-color: whitesmoke;
-    border: 10px solid #f4efcb;
-    overflow: hidden; }
+  flex-wrap: wrap;
+}
+div#macodeWrapper div.tinyVisualCode {
+  height: 300px;
+  min-width: 300px;
+  flex: 1;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  margin: 10px;
+  background-color: #f85818;
+  opacity: 0;
+  -webkit-transition: all 0.8s ease-in-out;
+  -moz-transition: all 0.8s ease-in-out;
+  -ms-transition: all 0.8s ease-in-out;
+  -o-transition: all 0.8s ease-in-out;
+  transition: all 0.8s ease-in-out;
+}
 
-/*# sourceMappingURL=home.css.map */
+div#macodeWrapper div.tinyVisualCode.display {
+  opacity: 1;
+  background-color: white;
+}
+
+div#macodeWrapper div.tinyVisualCode iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.overlay {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  color: red; }
+
+div.topSearchWrapper {
+  width: 99%;
+  position: fixed;
+  z-index: 100;
+  display: none;
+  opacity: 0.8; }
+div.topSearchWrapper input {
+  border: 2px solid #fa8b60;
+  width: 80%;
+  padding-left: 2em; }
+
+div.searchToggleWrapper {
+  display: inline-block;
+}
+
+div.searchToggleWrapper span {
+  font-size: 2.5em;
+  display: inline-block;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  cursor: pointer;
+  color: #fa8b60;
+  padding: 5px; }
+div.searchToggleWrapper span:hover {
+  color: #1e90ff; }
+div.searchToggleWrapper span.blue {
+  color: #1e90ff; }
+div.searchToggleWrapper span.top {
+  position: absolute;
+  z-index: 120;
+  top: 0; }
+div.switchPages {
+    position: fixed;
+    font-size: 3em;
+    top: 50%;
+    cursor: pointer;
+    display: none;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+div.switchPages a {
+  text-decoration: none;
+  color: #ccc;
+}
+div.switchPages a:hover {
+    color: black;
+}
+div.switchPages.left {
+    left: -20px;
+}
+div.switchPages.right {
+    right: -20px;
+}
+div.switchPages.left:hover {
+  left: 10px;
+}
+div.switchPages.right:hover {
+  right: 10px;
+}

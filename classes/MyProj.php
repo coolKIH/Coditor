@@ -185,10 +185,30 @@ class MyProj
     {
         $this->username = $username;
     }
-    public static function getAllProj() {
+    public static function getAllProj($sort_method=null, $page, $count, $maker) {
         $projects = [];
         if(self::$conn) {
-            $q = "select projId from myProj";
+            if($sort_method == "likes") {
+                $q = "select myProj.projId, count(myLike.projId) as likes from myProj 
+                LEFT JOIN myLike on myProj.projId=myLike.projId GROUP BY myProj.projId order by likes DESC";
+
+                if(isset($page) && isset($count)) {
+                    $start = ($page-1) * $count;
+                    $q = "select myProj.projId, count(myLike.projId) as likes from myProj 
+                LEFT JOIN myLike on myProj.projId=myLike.projId GROUP BY myProj.projId order by likes DESC
+                 LIMIT {$start},{$count}";
+
+                    if(isset($maker)) {
+                        $q = "select myProj.projId, count(myLike.projId) as likes from myProj 
+                LEFT JOIN myLike on myProj.projId=myLike.projId 
+                where myProj.username='{$maker}'
+                GROUP BY myProj.projId order by likes DESC
+                 LIMIT {$start},{$count}";
+                    }
+                }
+            } else {
+                $q = "select projId from myProj";
+            }
             $r = mysqli_query(self::$conn, $q);
             if(mysqli_num_rows($r) > 0) {
                 while ($row = mysqli_fetch_array($r)) {
@@ -223,6 +243,41 @@ class MyProj
         echo $q;
         $r = mysqli_query(self::$conn, $q);
         return $r;
+    }
+    public function getLikeNum() {
+        $q = "select count(username) from myLike where projId={$this->getProjId()}";
+        $r = mysqli_query(self::$conn, $q);
+        $row = mysqli_fetch_row($r);
+        return $row[0];
+    }
+    public static function getPageCount($pagesize, $username) {
+        if(!isset($username)) {
+            $q = "select count(*) from myProj";
+        } else {
+            $q = "select count(*) from myProj WHERE username='{$username}'";
+        }
+        $r = mysqli_query(self::$conn, $q);
+        $row = mysqli_fetch_row($r);
+        return ceil($row[0] / (float)$pagesize);
+    }
+    public function remove() {
+        $q = "delete from myCode where codeId='{$this->cssId}' or codeId='{$this->jsId}' or codeId='{$this->htmlId}' ";
+        $r = mysqli_query(self::$conn, $q);
+        if($r == true) {
+            $q = "delete from myProj where projId='{$this->projId}'";
+            $r = mysqli_query(self::$conn, $q);
+            return $r;
+        }
+        return false;
+    }
+    public static function exists($projId) {
+        $q = "select projId from myProj where projId='{$projId}'";
+        $r = mysqli_query(self::$conn, $q);
+        if(mysqli_num_rows($r) > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 ?>
