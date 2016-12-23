@@ -72,7 +72,6 @@ var editorFuncs = (function(){
             var lineNum = wrapNum + 1;
             e.preventDefault();
         }else if(key in pairCharDataReverse) {
-            console.log(key,this.lastKey);
             var leftPair = pairCharDataReverse[key];
             if(this.lastKey === leftPair) {
                 this.selectionStart = this.selectionEnd = start +1;
@@ -120,20 +119,14 @@ var editorFuncs = (function(){
         //This below not working...
         // iframe.src='../resulting-frame/resulting.frame.html';
 
-        putCSS.call(iframeDocument,codeCSS);
         putHTML.call(iframeDocument,codeHTML);
-        putJs.call(iframeDocument,codeJs);
+        putCSS.call(iframeDocument,removeBreakChars(codeCSS));
+        putJs.call(iframeDocument,removeBreakChars(codeJs));
     }
     function putHTML(toInsertCodeHTML) {
         this.querySelector('body').innerHTML = toInsertCodeHTML;
     }
     function putCSS(toInsertCodeCSS) {
-        /*var head = this.head || this.querySelector('head');
-        var style = this.createElement('style');
-        style.type='text/css';
-        style.innerText = toInsertCodeCSS;
-        console.log(style)
-        head.appendChild(style);*/
         var styleNode = this.head.querySelector("style#customStyle");
         styleNode.innerText=toInsertCodeCSS;
     }
@@ -168,11 +161,11 @@ var editorFuncs = (function(){
     }
     function getCodeJs() {
         var codeJs =  document.querySelector('textarea.code.js').value;
-        return removeBreakChars(codeJs);
+        return codeJs;
     }
     function getCodeCSS() {
         var codeCSS = document.querySelector('textarea.code.css').value;
-        return removeBreakChars(codeCSS);
+        return codeCSS;
 
     }
     function removeBreakChars(origin) {
@@ -185,28 +178,75 @@ var editorFuncs = (function(){
             this.attachEvent((event,listener));
         }
     }
+    function getPrjTitle() {
+        var titleDisplayer = document.querySelector("button#titleDisplayer");
+        return titleDisplayer.innerHTML.trim();
+    }
     function saveCodeListener(e) {
         var codeHTML = getCodeHTML();
         var codeCSS = getCodeCSS();
         var codeJs = getCodeJs();
+        var prjTitle = getPrjTitle();
+
         if(!hasContent([codeCSS,codeJs,codeHTML])) {
             alert(editorValues.warningMessages.emptyContent);
             return;
         }
+        var saveButton = this;
         var onTopNote = document.body.querySelector('div#onTopNote');
-        elemFadeIn(onTopNote);
         //save code inside of database
-        if(saveCodeInsideDb()) {
-            onTopNote.className = "success";
-            this.innerText = editorValues.buttonStrings.update;
-        } else {
-            onTopNote.className = "failure";
+        if(saveButton.className == "create") {
+            elemFadeIn(onTopNote);
+            saveCodeInsideDb({"html": codeHTML, "css": codeCSS, "js": codeJs, "title": prjTitle}, function(response) {
+                if(response && response["check"]=="ok") {
+                    onTopNote.className = "success";
+                    onTopNote.innerText = "保存成功";
+                    saveButton.innerText = editorValues.buttonStrings.update;
+                    $("div#getProjId").text(response["projId"]);
+                    saveButton.className = "update";
+                    window.location.href='index.php?maker=' + response['maker'] + '&view='+response['projId']
+                } else {
+                    onTopNote.className = "failure";
+                    onTopNote.innerText = "保存失败";
+                    if(response["check"]=="not allowed") {
+                        setTimeout(function() {
+                                window.location.hash = "popupWrapper";
+                                window.location.reload();
+                            },
+                            2000);
+                    }
+                }
+                setTimeout(function () {
+                        elemFadeOut(onTopNote)
+                    },
+                    2000);
+            });
+        } else  if(saveButton.className == "update"){
+            elemFadeIn(onTopNote);
+            $.ajax({
+                type: "POST",
+                url: "httpResponse/updateCode.php",
+                data: {
+                    "html": codeHTML,
+                    "css": codeCSS,
+                    "js": codeJs,
+                    "projTitle": prjTitle,
+                    "projId": $("div#getProjId").text()
+                },
+                success:function(result) {
+                    onTopNote.className = "success";
+                    onTopNote.innerText = "更新成功";
+                    setTimeout(function () {
+                            elemFadeOut(onTopNote)
+                        },
+                        2000);
+                }
+
+            }
+            )
         }
-        setTimeout(function() {
-            elemFadeOut(onTopNote)
-        },2000
-        );
     }
+
     function elemFadeIn(elem) {
         elem.style.display = "block";
     }
@@ -216,8 +256,26 @@ var editorFuncs = (function(){
     function checkIfExists() {
         return true;
     }
-    function saveCodeInsideDb() {
-        return true;
+    function saveCodeInsideDb(codeObj, callback) {
+        var codeObjStr = JSON.stringify(codeObj);
+        var httpRequest = new XMLHttpRequest();
+        if(!httpRequest) {
+            httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        httpRequest.onreadystatechange = function() {
+            if(httpRequest.readyState == XMLHttpRequest.DONE) {
+                if(httpRequest.status == 200) {
+                        var response = httpRequest.responseText;
+                        response = JSON.parse(response);
+                        callback(response);
+                    } else {
+                        callback(null);
+                }
+            }
+        };
+        httpRequest.open("POST", "httpResponse/saveCode.php", true);
+        httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        httpRequest.send("codeObjStr=" + codeObjStr);
     }
     return {
         insertInside:insertInside,
